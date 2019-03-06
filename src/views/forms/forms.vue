@@ -282,7 +282,9 @@
                <div class="row">
                 <div class="col-md-6">
                   <b-form-group horizontal label="Description" label-for="input15">
-                    <b-form-input type="text"  v-model="description"></b-form-input>
+                    <b-form-textarea  v-model="description" placeholder="Enter something"
+      rows="3"
+      max-rows="6"/>
                   </b-form-group>
                 </div>
                 </div>
