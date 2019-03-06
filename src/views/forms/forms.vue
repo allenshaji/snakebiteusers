@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <section class="forms">
+  <section class="news">
     <div class="row">
       <!-- <div class="col-md-6 d-flex align-items-stretch grid-margin">
         <div class="row flex-grow">
@@ -201,7 +201,7 @@
       </div> -->
       <div class="col-12 grid-margin">
         <div class="card">
-          <div class="card-body">
+          <div class="card-body" v-if = "id == ''">
             <h4 class="card-title">Enter the details</h4>
             <form class="form-sample" @submit="onSubmit">
               <p class="card-description">
@@ -244,7 +244,7 @@
                   </div>
                                             <!-- <button class="close" @click.prevent="reginonalNames.splice(index, 1)">&times;</button> -->
                   </div>
-                <a @click="addNewDetect"><i>Add Another Names</i></a>
+                <a @click="addNewDetect" style="color:red;"><i>Add Another Names</i></a>
                 <hr>
               <p class="card-description">
                 <strong>Other Info</strong>
@@ -285,35 +285,52 @@
                     <b-form-input type="text"  v-model="description"></b-form-input>
                   </b-form-group>
                 </div>
-              </div>
-              <input type="file" @change="onFileChanged">
+                </div>
+                <!-- <div class="row">
+                <div class="col-md-4">
+                  <input type="file" accept="image/*" id="file" ref="file" required="" @change="onFileChanged">
+             <div id="preview">
+           <img v-if="url" :src="url" />
+            </div>
+             </div>
+            <div class="col-md-4">
+                  <b-form-group horizontal label="Caption" label-for="input15">
+                    <b-form-input type="text"  v-model="caption"></b-form-input>
+                  </b-form-group>
+                </div>
+                <div class="col-md-4">
+                  <b-form-group horizontal label="Author" label-for="input15">
+                    <b-form-input type="text"  v-model="author"></b-form-input>
+                  </b-form-group>
+                </div>
+              </div> -->
                 <b-button variant="primary" class="btn-fw" type="submit">Submit</b-button>
-              <!-- <div class="row">
-                <div class="col-md-6">
-                  <b-form-group horizontal label="Address 2" label-for="input17">
-                    <b-form-input type="text" id="input17"></b-form-input>
-                  </b-form-group>
-                </div>
-                <div class="col-md-6">
-                  <b-form-group horizontal label="Pincode" label-for="input18">
-                    <b-form-input type="text" id="input18"></b-form-input>
-                  </b-form-group>
-                </div>
-              </div> -->
-              <!-- <div class="row">
-                <div class="col-md-6">
-                  <b-form-group horizontal label="City" label-for="input19">
-                    <b-form-input type="text" id="input19"></b-form-input>
-                  </b-form-group>
-                </div>
-                <div class="col-md-6">
-                  <b-form-group horizontal label="Country">
-                    <b-form-select v-model="selected" :options="countries"/>
-                  </b-form-group>
-                </div>
-              </div> -->
             </form>
           </div>
+           <div class="card-body" v-if = "id != ''">
+                   <h4 class="card-title">Add Images</h4>
+                   <form class="form-sample" @submit="imagesubmit">
+                  <div class="row">
+                <div class="col-md-4">
+                  <input type="file" accept="image/*" id="file" ref="file" required="" @change="onFileChanged">
+             <div id="preview">
+           <img v-if="url" :src="url" />
+            </div>
+             </div>
+            <div class="col-md-4">
+                  <b-form-group horizontal label="Caption" label-for="input15">
+                    <b-form-input type="text"  v-model="caption"></b-form-input>
+                  </b-form-group>
+                </div>
+                <div class="col-md-4">
+                  <b-form-group horizontal label="Author" label-for="input15">
+                    <b-form-input type="text"  v-model="author"></b-form-input>
+                  </b-form-group>
+                </div>
+              </div>
+               <b-button variant="primary" class="btn-fw" type="submit">Submit</b-button>
+              </form>
+                </div>
         </div>
       </div>
     </div>
@@ -324,11 +341,12 @@
 <script lang="js">
 import axios from 'axios'
 export default {
-  name: 'forms',
+  name: 'news',
   data () {
     return {
       file: null,
       id: '',
+      ids: '',
       name: '',
       scientificName: '',
       distribution: '',
@@ -336,6 +354,8 @@ export default {
       description: '',
       family: '',
       venomType: '',
+      caption: '',
+      author: '',
       options: [
         { value: null, text: 'Please select an option' },
         { value: 'a', text: 'This is First option' },
@@ -365,18 +385,37 @@ export default {
         name: null,
         state: null
       }],
-      selectedFile: null
+      snakeImages: [{
+        snakes: null,
+        credits: null
+      }],
+      selectedFile: null,
+      url: ''
     }
   },
   methods: {
     onFileChanged (event) {
       this.selectedFile = event.target.files[0]
+      this.url = URL.createObjectURL(this.selectedFile)
     },
     addNewDetect: function () {
       this.reginonalNames.push({
         name: null,
         state: null
       })
+    },
+    addNewImages: function () {
+      this.snakeImages.push({
+        snakes: null,
+        credits: null
+      })
+    },
+    resetForm () {
+      this.author = ''
+      this.caption = ''
+      this.selectedFile = ''
+      this.url = ''
+      this.file = null
     },
     onSubmit (evt) {
       evt.preventDefault()
@@ -391,7 +430,7 @@ export default {
       // formData.append('venomType', this.venomType)
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/snake/',
+        url: 'http://localhost:3000/snake/',
         data: {
           name: this.name,
           scientificName: this.scientificName,
@@ -407,51 +446,51 @@ export default {
         // }
       })
         .then(response => {
-          console.log(response.data.data._id)
           this.id = response.data.data._id
-          let formData = new FormData()
-          formData.append('id', response.data.data._id)
-          formData.append('photo', this.selectedFile)
-          console.log(formData)
-          axios({
-            method: 'post',
-            url: 'http://18.191.40.18/snake/image',
-            data: formData,
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          })
-          alert('Success')
+          this.imagesubmit()
           // this.resetFormFields()
         })
         .catch(e => {
           console.log(e.message)
           this.errors.push(e)
         })
-      // axios.post('http://13.233.146.113/aesgs',formData,
-      //     {
-      //           headers: {
-      //               'Content-Type': 'multipart/form-data'
-      //           }
-      //         }
-      //       ) .then(response => {
-      //         alert("Success")
-      //      this.loadData();
-      //      this.resetFormFields();
-      //      this.errors = [];
-      //   })
-      //   .catch(e => {
-      //     console.log('FAILURE!!');
-      //    alert("Failure");
-
-      //   });
-      // var data = {}
+    },
+    imagesubmit (evt) {
+      evt.preventDefault()
+      let formData = new FormData()
+      formData.append('id', this.id)
+      formData.append('photo', this.selectedFile)
+      formData.append('caption', this.caption)
+      formData.append('author', this.author)
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/snake/image',
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then(response => {
+          alert('Success')
+          this.resetForm()
+        })
+        .catch(e => {
+          console.log(e.message)
+          this.errors.push(e)
+        })
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.forms {
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  width: 20%;
 }
 </style>
