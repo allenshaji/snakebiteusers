@@ -52,6 +52,8 @@
         <!-- <li class="nav-item"><router-link class="nav-link" to="/tables/"><img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon"><span class="menu-title">Tables</span></router-link></li>
         <li class="nav-item"><router-link class="nav-link" to="/icons/"><img class="menu-icon" src="../../assets/images/menu_icons/07.png" alt="menu icon"><span class="menu-title">Icons</span></router-link></li> -->
         <li class="nav-item"><router-link class="nav-link" to="/forms/"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">Add Snakes</span></router-link></li>
+         <li class="nav-item"><router-link class="nav-link" to="/viewlist/"><img class="menu-icon" src="../../assets/images/menu_icons/07.png" alt="menu icon"><span class="menu-title">View Snakes</span></router-link></li>
+          <li class="nav-item"><router-link class="nav-link" to="/userlist/"><img class="menu-icon" src="../../assets/images/menu_icons/05.png" alt="menu icon"><span class="menu-title">Approve Users</span></router-link></li>
       </ul>
     </nav>
   </section>

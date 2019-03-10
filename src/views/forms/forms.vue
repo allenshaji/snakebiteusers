@@ -2,6 +2,10 @@
 
   <section class="news">
     <div class="row">
+      <div id='loadingmessage' style="text-align:center;margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: white; z-index: 30001; opacity: 0.8;" v-if="loading">
+                            <p style="position: absolute; color: White; top: 40%; left: 40%;">
+                                <img src='../../assets/snakes.gif' /></p>
+                        </div>
       <!-- <div class="col-md-6 d-flex align-items-stretch grid-margin">
         <div class="row flex-grow">
           <div class="col-12">
@@ -242,7 +246,6 @@
                     <b-form-input type="text" v-model="det.name"></b-form-input>
                   </b-form-group>
                   </div>
-                                            <!-- <button class="close" @click.prevent="reginonalNames.splice(index, 1)">&times;</button> -->
                   </div>
                 <a @click="addNewDetect" style="color:red;"><i>Add Another Names</i></a>
                 <hr>
@@ -269,22 +272,20 @@
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <b-form-group horizontal label="Family" label-for="input15">
+                  <b-form-group horizontal label="Family" >
                     <b-form-input type="text"  v-model="family"></b-form-input>
                   </b-form-group>
                 </div>
                 <div class="col-md-6">
-                  <b-form-group horizontal label="Characteristics" label-for="input16">
+                  <b-form-group horizontal label="Scalation" >
                     <b-form-input type="text"  v-model="characteristics"></b-form-input>
                   </b-form-group>
                 </div>
               </div>
                <div class="row">
                 <div class="col-md-6">
-                  <b-form-group horizontal label="Description" label-for="input15">
-                    <b-form-textarea  v-model="description" placeholder="Enter something"
-      rows="3"
-      max-rows="6"/>
+                  <b-form-group horizontal label="Description" >
+                    <vue-editor v-model="description" required=""></vue-editor>
                   </b-form-group>
                 </div>
                 </div>
@@ -342,8 +343,12 @@
 
 <script lang="js">
 import axios from 'axios'
+import { VueEditor } from 'vue2-editor'
 export default {
   name: 'news',
+  components: {
+    VueEditor
+  },
   data () {
     return {
       file: null,
@@ -392,7 +397,8 @@ export default {
         credits: null
       }],
       selectedFile: null,
-      url: ''
+      url: '',
+      loading: false
     }
   },
   methods: {
@@ -430,9 +436,10 @@ export default {
       // formData.append('description', this.description)
       // formData.append('family', this.family)
       // formData.append('venomType', this.venomType)
+      this.loading = true
       axios({
         method: 'post',
-        url: 'http://localhost:3000/snake/',
+        url: 'http://18.191.40.18/snake/',
         data: {
           name: this.name,
           scientificName: this.scientificName,
@@ -449,16 +456,17 @@ export default {
       })
         .then(response => {
           this.id = response.data.data._id
-          this.imagesubmit()
-          // this.resetFormFields()
+          alert('Successfully added')
+          this.loading = false
         })
         .catch(e => {
-          console.log(e.message)
-          this.errors.push(e)
+          this.loading = false
+          alert('Failed')
         })
     },
     imagesubmit (evt) {
       evt.preventDefault()
+      this.loading = true
       let formData = new FormData()
       formData.append('id', this.id)
       formData.append('photo', this.selectedFile)
@@ -466,7 +474,7 @@ export default {
       formData.append('author', this.author)
       axios({
         method: 'post',
-        url: 'http://localhost:3000/snake/image',
+        url: 'http://18.191.40.18/snake/image/',
         data: formData,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -475,10 +483,11 @@ export default {
         .then(response => {
           alert('Success')
           this.resetForm()
+          this.loading = false
         })
         .catch(e => {
-          console.log(e.message)
-          this.errors.push(e)
+          alert('Too Large image!! Failed')
+          this.loading = false
         })
     }
   }

@@ -25,8 +25,10 @@ import tooltips from '../views/ui-components/tooltips'
 
 // Form Components
 import forms from '../views/forms/forms'
+import viewlist from '../views/forms/viewlist'
+import userlist from '../views/forms/userlist'
+import editsnake from '../views/forms/editsnake'
 
-// Sample Pages
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
 import login from '../views/sample-pages/login'
@@ -141,5 +143,21 @@ export default new Router({
     path: '/forms',
     name: 'forms',
     component: forms
+  },
+  {
+    path: '/viewlist',
+    name: 'viewlist',
+    component: viewlist
+  },
+  {
+    path: '/userlist',
+    name: 'userlist',
+    component: userlist
+  },
+  {
+    path: '/editsnake/:id',
+    name: 'editsnake',
+    component: editsnake,
+    props: true
   }]
 })
