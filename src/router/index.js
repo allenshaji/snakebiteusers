@@ -28,6 +28,10 @@ import forms from '../views/forms/forms'
 import viewlist from '../views/forms/viewlist'
 import userlist from '../views/forms/userlist'
 import editsnake from '../views/forms/editsnake'
+import newuserlist from '../views/forms/newuserlist'
+import rescuerlist from '../views/forms/rescuerlist'
+import rescuerapproval from '../views/forms/rescuerapproval'
+import locations from '../views/forms/locations.vue'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -153,6 +157,26 @@ export default new Router({
     path: '/userlist',
     name: 'userlist',
     component: userlist
+  },
+  {
+    path: '/newuserlist',
+    name: 'newuserlist',
+    component: newuserlist
+  },
+  {
+    path: '/rescuerlist',
+    name: 'rescuerlist',
+    component: rescuerlist
+  },
+  {
+    path: '/rescuerapproval',
+    name: 'rescuerapproval',
+    component: rescuerapproval
+  },
+  {
+    path: '/locations',
+    name: 'locations',
+    component: locations
   },
   {
     path: '/editsnake/:id',

@@ -9,7 +9,7 @@
     <div class="col-md-12 grid-margin">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title mb-0">Snake List</h4>
+          <h4 class="card-title mb-0">User List</h4>
             <div class="justify-content-centermy-1 row">
                  <b-form-fieldset horizontal label="Rows per page" class="col-6">
                   <b-form-select :options="[{text:20,value:20},{text:30,value:30},{text:50,value:50}]" v-model="perPage">
@@ -21,11 +21,11 @@
                 </b-form-fieldset>
               </div>
               <template>
-                <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;"> <template id="pdcy" slot="characteristics" slot-scope="item">
-                  <button class="btn btn-danger" @click="deleteSnake(item)">Delete</button>
-                  </template>
-                  <template id="_id" slot="_id" slot-scope="item">
-                  <router-link class="btn btn-success" :to="'/editsnake/' + item.value">Edit</router-link>
+                <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;">
+                 <template id="pdcy" slot="_id" slot-scope="item">
+                    <!-- <router-link :to="'/view/' + item.item._id">Approve</router-link> -->
+                   <button class="btn btn-primary" @click="approve(item)" v-if="item.item.status == false">Approve</button>
+                   <button class="btn btn-warning" v-if="item.item.status == true">Already Approved</button>
                   </template>
                 </b-table>
               </template>
@@ -47,33 +47,23 @@ export default {
       items: [],
       fields: [
         {
-          key: 'name',
+          key: 'username',
           sortable: true
         },
         {
-          key: 'distribution',
+          key: 'name'
+        },
+        {
+          key: 'phone',
           sortable: true
         },
         {
-          key: 'scientificName',
-          sortable: true
-        },
-        {
-          key: 'venomType',
-          sortable: true
-        },
-        {
-          key: 'family',
+          key: 'email',
           sortable: true
         },
         {
           key: '_id',
-          label: 'Edit',
-          sortable: true
-        },
-        {
-          key: 'characteristics',
-          label: 'Delete',
+          label: 'Approve',
           sortable: true
         }
       ],
@@ -91,7 +81,7 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/snake/all/',
+        url: 'http://18.191.40.18/users/rescuers/all',
         method: 'GET'
       }).then(response => {
         console.log(response.data.data)
@@ -99,29 +89,26 @@ export default {
         this.loading = false
       }).catch(e => {
         console.log(e)
-        this.errors.push(e)
+        this.loading = false
       })
     },
-    deleteSnake: function (item) {
+    approve: function (item) {
       var vm = this
       vm.item = item.item._id
-      this.loading = true
       axios({
-        method: 'DELETE',
+        method: 'POST',
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/snake/',
+        url: 'http://18.191.40.18/user/activate',
         data: {
           id: vm.item
         }
       }).then(response => {
-        alert('Successfully Deleted Snake')
+        alert('Successfully Approved Item')
         this.getList()
-        this.loading = false
       }).catch(e => {
         console.log(e)
-        this.loading = false
       })
     }
   }

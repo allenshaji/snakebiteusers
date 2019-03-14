@@ -9,15 +9,15 @@
                 <i class="mdi mdi-cube text-danger icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="card-text text-right">Total Revenue</p>
+                <p class="card-text text-right">Total Snakes</p>
                 <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">$65,650</h3>
+                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_snakes}}</h3>
                 </div>
               </div>
             </div>
-            <p class="text-muted mt-3">
+            <!-- <p class="text-muted mt-3">
               <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> 65% lower growth
-            </p>
+            </p> -->
           </div>
         </div>
       </div>
@@ -29,15 +29,15 @@
                 <i class="mdi mdi-receipt text-warning icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="card-text text-right">Orders</p>
+                <p class="card-text text-right">Total Users</p>
                 <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">3455</h3>
+                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_total_users}}</h3>
                 </div>
               </div>
             </div>
-            <p class="text-muted mt-3">
+            <!-- <p class="text-muted mt-3">
               <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Product-wise sales
-            </p>
+            </p> -->
           </div>
         </div>
       </div>
@@ -49,15 +49,15 @@
                 <i class="mdi mdi-poll-box text-teal icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="card-text text-right">Sales</p>
+                <p class="card-text text-right">Total Rescuers</p>
                 <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">5693</h3>
+                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_total_rescuer}}</h3>
                 </div>
               </div>
             </div>
-            <p class="text-muted mt-3">
+            <!-- <p class="text-muted mt-3">
               <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> Weekly Sales
-            </p>
+            </p> -->
           </div>
         </div>
       </div>
@@ -69,15 +69,15 @@
                 <i class="mdi mdi-account-location text-info icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="card-text text-right">Employees</p>
+                <p class="card-text text-right">Total Reports</p>
                 <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">246</h3>
+                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_total_locations}}</h3>
                 </div>
               </div>
             </div>
-            <p class="text-muted mt-3">
+            <!-- <p class="text-muted mt-3">
               <i class="mdi mdi-reload mr-1" aria-hidden="true"></i> Product-wise sales
-            </p>
+            </p> -->
           </div>
         </div>
       </div>
@@ -85,7 +85,8 @@
     <div class="row">
       <div class="col-12 grid-margin">
         <div class="card">
-          <div class="card-body">
+           <div id="map"></div>
+          <!-- <div class="card-body">
             <h5 class="card-title mb-4">Orders</h5>
             <div class="table-responsive">
               <table class="table center-aligned-table">
@@ -156,11 +157,11 @@
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-12 grid-margin">
         <div class="card">
           <div class="card-body">
@@ -355,15 +356,112 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
 </template>
 
 <script lang="js">
+import axios from 'axios'
+var marker
 export default {
-  name: 'dashboard'
+  name: 'dashboard',
+  data () {
+    return {
+      records: [],
+      items: [],
+      oMarker: [],
+      stats: ''
+    }
+  },
+  mounted: function () {
+    this.loadMap()
+    this.loadStats()
+  },
+  methods: {
+    loadStats () {
+      this.loading = true
+      axios({
+        url: 'http://18.191.40.18/user/stats/',
+        method: 'GET'
+      }).then(response => {
+        this.stats = response.data.data
+        this.loading = false
+      }).catch(e => {
+        console.log(e)
+        this.errors.push(e)
+      })
+    },
+    loadMap () {
+      var mapCanvas = document.getElementById('map')
+      var mapOptions = {
+        // eslint-disable-next-line
+        center: new google.maps.LatLng(20.5937, 78.9629),
+        zoom: 4,
+        // eslint-disable-next-line
+        mapTypeId: google.maps.MapTypeId.HYBRID
+      }
+      var vm = this
+      // eslint-disable-next-line
+      vm.map = new google.maps.Map(mapCanvas, mapOptions)
+      axios({
+        url: 'http://18.191.40.18/location/all/',
+        method: 'GET'
+      }).then(response => {
+        this.items = response.data.data
+        this.records = response.data.data.records
+        for (var i = 0; i < this.records.length; i++) {
+          var id = this.records[i]._id
+          var lat = this.records[i].location[0]
+          var lon = this.records[i].location[1]
+          var des = this.records[i].description
+          var sit = this.records[i].situation
+          var snake = this.records[i].snake.name
+          // eslint-disable-next-line
+          var latlngset = new google.maps.LatLng(lon, lat)
+          var iconBase = 'http://leopardtechlabs.com/fred.png'
+          // eslint-disable-next-line
+          marker = new google.maps.Marker({
+            map: vm.map,
+            position: latlngset,
+            icon: iconBase
+          })
+          vm.oMarker[i] = {
+            m: marker,
+            c: id
+          }
+          var content =
+            '<table><tr><td colspan=2 style="padding-left:10px;"><p style="color:#ff6907;">' + lat +
+            '<a style="color:#333333">&emsp;&emsp;&emsp;' + lon +
+            '</a></p><p style="font-size:18px;color:#333333;font-weight:500"><b>' + snake +
+            '</b></p><p style="color:#333333;size:12px;">' + sit +
+            '</p><p style="color:#333333;size:12px;">' + des + '</p></td></tr></table>'
+          // eslint-disable-next-line
+          var infowindow = new google.maps.InfoWindow()
+          // eslint-disable-next-line
+          google.maps.event.addListener(marker, 'click',
+            (function (marker, content, infowindow) {
+              return function () {
+                infowindow.setContent(content)
+                infowindow.open(vm.map, marker)
+              }
+            })(marker, content, infowindow)
+          )
+        }
+        this.loading = false
+      }).catch(e => {
+        console.log(e)
+        this.errors.push(e)
+      })
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
+#map {
+  height: 600px;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
 </style>

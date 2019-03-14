@@ -21,11 +21,8 @@
                 </b-form-fieldset>
               </div>
               <template>
-                <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;"> <template id="pdcy" slot="characteristics" slot-scope="item">
-                  <button class="btn btn-danger" @click="deleteSnake(item)">Delete</button>
-                  </template>
-                  <template id="_id" slot="_id" slot-scope="item">
-                  <router-link class="btn btn-success" :to="'/editsnake/' + item.value">Edit</router-link>
+                <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;"> <template id="pdcy" slot="_id" slot-scope="item">
+                  <button class="btn btn-danger" @click="deleteLocation(item)">Delete</button>
                   </template>
                 </b-table>
               </template>
@@ -47,32 +44,19 @@ export default {
       items: [],
       fields: [
         {
-          key: 'name',
+          key: 'createdAt',
           sortable: true
         },
         {
-          key: 'distribution',
+          key: 'situation',
           sortable: true
         },
         {
-          key: 'scientificName',
-          sortable: true
-        },
-        {
-          key: 'venomType',
-          sortable: true
-        },
-        {
-          key: 'family',
+          key: 'description',
           sortable: true
         },
         {
           key: '_id',
-          label: 'Edit',
-          sortable: true
-        },
-        {
-          key: 'characteristics',
           label: 'Delete',
           sortable: true
         }
@@ -91,18 +75,18 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/snake/all/',
+        url: 'http://18.191.40.18/location/all/',
         method: 'GET'
       }).then(response => {
         console.log(response.data.data)
-        this.items = response.data.data
+        this.items = response.data.data.records
         this.loading = false
       }).catch(e => {
         console.log(e)
         this.errors.push(e)
       })
     },
-    deleteSnake: function (item) {
+    deleteLocation: function (item) {
       var vm = this
       vm.item = item.item._id
       this.loading = true
@@ -111,7 +95,7 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/snake/',
+        url: 'http://18.191.40.18/location/',
         data: {
           id: vm.item
         }

@@ -2,6 +2,10 @@
 
  <section class="widgets">
   <div class="row">
+   <div id='loadingmessage' style="text-align:center;margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: white; z-index: 30001; opacity: 0.8;" v-if="loading">
+                            <p style="position: absolute; color: White; top: 40%; left: 40%;">
+                                <img src='../../assets/snakes.gif' /></p>
+                        </div>
     <div class="col-md-12 grid-margin">
       <div class="card">
         <div class="card-body">
@@ -66,7 +70,8 @@ export default {
       currentPage: 1,
       perPage: 20,
       filter: null,
-      striped: true
+      striped: true,
+      loading: false
     }
   },
   mounted: function () {
@@ -74,12 +79,14 @@ export default {
   },
   methods: {
     getList () {
+      this.loading = true
       axios({
         url: 'http://18.191.40.18/user/all/',
         method: 'GET'
       }).then(response => {
         console.log(response.data.data)
         this.items = response.data.data
+        this.loading = false
       }).catch(e => {
         console.log(e)
         this.errors.push(e)

@@ -8,8 +8,8 @@
                         </div>
       <div class="col-12 grid-margin">
         <div class="card">
-          <div class="card-body" v-if = "id == ''">
-            <h4 class="card-title">Enter the details</h4>
+          <div class="card-body">
+            <h4 class="card-title">Edit the details</h4>
             <form class="form-sample" @submit="onSubmit">
               <p class="card-description">
                 <strong>Basic info</strong>
@@ -74,10 +74,10 @@
                   </b-form-group>
                 </div>
                 </div>
-                <b-button variant="primary" class="btn-fw" type="submit">Submit</b-button>
+                <b-button variant="primary" class="btn-fw" type="submit">Update Details</b-button>
             </form>
           </div>
-           <div class="card-body" v-if = "id != ''">
+                  <div class="card-body">
                    <h4 class="card-title">Add Images</h4>
                    <form class="form-sample" @submit="imagesubmit">
                   <div class="row">
@@ -100,6 +100,17 @@
               </div>
                <b-button variant="primary" class="btn-fw" type="submit">Submit</b-button>
               </form>
+                </div>
+                  <div class="card-body">
+                   <h4 class="card-title">View Images</h4>
+                  <div class="row" v-for = "pic in photographs" style="margin-top:20px;">
+                <div class="col-md-4">
+                  <img v-bind:src="'http://18.191.40.18/u/'+pic.url" height="auto" width="100%" />
+             </div>
+             <div class="col-md-4">
+                <button class="btn btn-danger" @click="deleteImage(pic)">Delete</button>
+             </div>
+              </div>
                 </div>
         </div>
       </div>
@@ -140,8 +151,13 @@ export default {
       }],
       selectedFile: null,
       url: '',
-      loading: false
+      loading: false,
+      photographs: [],
+      fid: ''
     }
+  },
+  mounted: function () {
+    this.getAll()
   },
   methods: {
     onFileChanged (event) {
@@ -161,13 +177,56 @@ export default {
       this.url = ''
       this.file = null
     },
+    getAll () {
+      this.loading = true
+      axios({
+        url: 'http://18.191.40.18/snake/' + this.id,
+        method: 'POST'
+      }).then(response => {
+        this.items = response.data.data
+        var d = this.items
+        this.fid = d._id
+        this.name = d.name
+        this.scientificName = d.scientificName
+        this.distribution = d.distribution
+        this.characteristics = d.characteistics
+        this.description = d.description
+        this.venomType = d.venomType
+        this.family = d.family
+        var temp = []
+        for (var i = 0; i < d.reginonalNames.length; i++) {
+          var ty = {
+            name: d.reginonalNames[i].name,
+            state: d.reginonalNames[i].state
+          }
+          temp.push(ty)
+        }
+        this.reginonalNames = temp
+        var tempr = []
+        for (var j = 0; j < d.photographs.length; j++) {
+          var tyz = {
+            _id: d.photographs[j]._id,
+            author: d.photographs[j].author,
+            caption: d.photographs[j].caption,
+            url: d.photographs[j].url
+          }
+          tempr.push(tyz)
+        }
+        this.photographs = tempr
+        console.log(this.photographs)
+        this.loading = false
+      }).catch(e => {
+        this.loading = false
+      })
+    },
     onSubmit (evt) {
       evt.preventDefault()
       this.loading = true
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/snake/',
+        url: 'http://18.191.40.18/snake/edit',
         data: {
+          id: this.id,
           name: this.name,
           scientificName: this.scientificName,
           reginonalNames: this.reginonalNames,
@@ -182,9 +241,9 @@ export default {
         // }
       })
         .then(response => {
-          this.id = response.data.data._id
-          alert('Successfully added')
+          alert('Successfully Editted Data')
           this.loading = false
+          this.getAll()
         })
         .catch(e => {
           this.loading = false
@@ -210,12 +269,37 @@ export default {
         .then(response => {
           alert('Success')
           this.resetForm()
+          this.getAll()
           this.loading = false
         })
         .catch(e => {
           alert('Too Large image!! Failed')
           this.loading = false
         })
+    },
+    deleteImage: function (item) {
+      console.log(item)
+      var vm = this
+      vm.item = item._id
+      this.loading = true
+      axios({
+        method: 'POST',
+        // headers: {
+        //             Authorization: localStorage.getItem("token")
+        //         },
+        url: 'http://18.191.40.18/snake/remove/image/',
+        data: {
+          id: vm.fid,
+          pid: vm.item
+        }
+      }).then(response => {
+        alert('Successfully Deleted Snake')
+        this.getAll()
+        this.loading = false
+      }).catch(e => {
+        console.log(e)
+        this.loading = false
+      })
     }
   }
 }
