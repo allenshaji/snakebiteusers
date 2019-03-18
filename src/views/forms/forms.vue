@@ -213,7 +213,7 @@
               </p>
               <div class="row">
                 <div class="col-md-6">
-                  <b-form-group horizontal label="Snake Name" description="Snake Name" label-for="input14">
+                  <b-form-group horizontal label="Common Name" description="Common Name" label-for="input14">
                     <b-form-input type="text" v-model="name"></b-form-input>
                   </b-form-group>
                 </div>
@@ -221,8 +221,8 @@
                   <b-form-group description="Scientic Name" horizontal label="Scientic Name">
                     <b-form-input type="text" v-model="scientificName"></b-form-input>
                   </b-form-group>
-                </div>
-              </div>
+                  </div>
+                  </div>
               <!-- <div class="row">
                 <div class="col-md-6">
                   <b-form-group horizontal label="Regional Names" description="Regional Names">
@@ -235,19 +235,36 @@
                   </b-form-group>
                 </div>
               </div> -->
-                 <div class="row" v-for="(det, index) in reginonalNames" :key="index">
+                 <!-- <div class="row" v-for="(det, index) in reginonalNames" :key="index">
                     <div class="col-md-6">
                     <b-form-group horizontal label="State">
                     <b-form-input type="text" v-model="det.state"></b-form-input>
                   </b-form-group>
                   </div>
                     <div class="col-md-6">
-                    <b-form-group horizontal label="Name">
+                    <b-form-group horizontal label="Regional Name">
                     <b-form-input type="text" v-model="det.name"></b-form-input>
                   </b-form-group>
                   </div>
                   </div>
-                <a @click="addNewDetect" style="color:red;"><i>Add Another Names</i></a>
+                <a @click="addNewDetect" style="color:red;"><i>Add Another State</i></a> -->
+                       <div class="row">
+                          <div class="col-md-6">
+                  <b-form-group description="Other Names" horizontal label="Other Names">
+                    <b-form-input type="text" v-model="othernames"></b-form-input>
+                  </b-form-group>
+                </div>
+                    <div class="col-md-6">
+                       <b-form-group horizontal label="State">
+                  <v-select multiple v-model="states" :options="option"></v-select>
+                   </b-form-group>
+                  </div>
+                    <div class="col-md-6">
+                    <b-form-group horizontal label="Regional Name">
+                    <b-form-input type="text" v-model="rname"></b-form-input>
+                  </b-form-group>
+                  </div>
+                  </div>
                 <hr>
               <p class="card-description">
                 <strong>Other Info</strong>
@@ -266,7 +283,11 @@
                     </b-form-radio-group>
                   </b-form-group> -->
                    <b-form-group horizontal label="Venom Type">
-                    <b-form-input type="text" v-model="venomType"></b-form-input>
+                    <b-form-select v-model="venomType" class="mb-3">
+      <option value="Highly Venomous">Highly Venomous</option>
+      <option value="Mildly Venomous">Mildly Venomous</option>
+      <option value="Non Venomous">Non Venomous</option>
+    </b-form-select>
                   </b-form-group>
                 </div>
               </div>
@@ -276,16 +297,66 @@
                     <b-form-input type="text"  v-model="family"></b-form-input>
                   </b-form-group>
                 </div>
-                <div class="col-md-6">
-                  <b-form-group horizontal label="Scalation" >
-                    <b-form-input type="text"  v-model="characteristics"></b-form-input>
+                 <div class="col-md-6">
+                  <b-form-group horizontal label="Occurence" >
+                    <b-form-select v-model="occurence" class="mb-3">
+      <option value="Common">Common</option>
+      <option value="Uncommon">Uncommon</option>
+      <option value="Rare">Rare</option>
+    </b-form-select>
                   </b-form-group>
                 </div>
               </div>
-               <div class="row">
+                         <div class="row">
+                              <div class="col-md-6">
+                  <b-form-group horizontal label="WLPA" >
+                    <b-form-select v-model="wlpa" class="mb-3">
+      <option value="Schedule  -I">Schedule  -I</option>
+      <option value="Schedule  -II">Schedule  -II</option>
+      <option value="Schedule  -III">Schedule  -III</option>
+       <option value="Schedule  -IV">Schedule  -IV</option>
+      <option value="Not Listed">Not Listed</option>
+      <option value="Vulnerable (VU)">Vulnerable (VU)</option>
+       <option value="Near Threatened (NT)">Near Threatened (NT)</option>
+      <option value="Conservation Dependent (CD)">Conservation Dependent (CD)</option>
+      <option value="Extinct (EX)">Extinct (EX)</option>
+      <option value="Non Venomous">Extinct in the Wild (EW)</option>
+    </b-form-select>
+                  </b-form-group>
+                </div>
                 <div class="col-md-6">
-                  <b-form-group horizontal label="Description" >
+                  <b-form-group horizontal label="IUCN" >
+                     <b-form-select v-model="iucn" class="mb-3">
+      <option value="Not Evaluated (NE)">Not Evaluated (NE)</option>
+      <option value="Data Deficient (DD)">Data Deficient (DD)</option>
+      <option value="Least Concern (LC)">Least Concern (LC)</option>
+       <option value="Critically Endangered (CR)">Critically Endangered (CR)</option>
+      <option value="Endangered (EN)">Endangered (EN)</option>
+      <option value="Vulnerable (VU)">Vulnerable (VU)</option>
+       <option value="Near Threatened (NT)">Near Threatened (NT)</option>
+      <option value="Conservation Dependent (CD)">Conservation Dependent (CD)</option>
+      <option value="Extinct (EX)">Extinct (EX)</option>
+      <option value="Non Venomous">Extinct in the Wild (EW)</option>
+    </b-form-select>
+                  </b-form-group>
+                </div>
+                </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                  <b-form-group horizontal label="Scalation" >
+                    <vue-editor v-model="characteristics"></vue-editor>
+                  </b-form-group>
+                </div>
+                <div class="col-md-6">
+                  <b-form-group horizontal label="Morphology" >
                     <vue-editor v-model="description" required=""></vue-editor>
+                  </b-form-group>
+                </div>
+                </div>
+                 <div class="row">
+                <div class="col-md-6">
+                  <b-form-group horizontal label="Short Description" >
+                    <vue-editor v-model="shortdes" required=""></vue-editor>
                   </b-form-group>
                 </div>
                 </div>
@@ -344,10 +415,14 @@
 <script lang="js">
 import axios from 'axios'
 import { VueEditor } from 'vue2-editor'
+import Multiselect from 'vue-multiselect'
+import vSelect from 'vue-select'
 export default {
   name: 'news',
   components: {
-    VueEditor
+    VueEditor,
+    Multiselect,
+    vSelect
   },
   data () {
     return {
@@ -356,19 +431,23 @@ export default {
       ids: '',
       name: '',
       scientificName: '',
+      othernames: '',
       distribution: '',
       characteristics: '',
       description: '',
+      shortdes: '',
       family: '',
       venomType: '',
       caption: '',
       author: '',
+      occurence: '',
       options: [
-        { value: null, text: 'Please select an option' },
-        { value: 'a', text: 'This is First option' },
-        { value: 'b', text: 'Selected Option' },
-        { value: {'C': '3PO'}, text: 'This is an option with object value' },
-        { value: 'd', text: 'This one is disabled', disabled: true }
+        { name: 'Vue.js', language: 'JavaScript' },
+        { name: 'Adonis', language: 'JavaScript' },
+        { name: 'Rails', language: 'Ruby' },
+        { name: 'Sinatra', language: 'Ruby' },
+        { name: 'Laravel', language: 'PHP' },
+        { name: 'Phoenix', language: 'Elixir' }
       ],
       GenderSelect: [
         { value: 'Male', text: 'Male' },
@@ -398,7 +477,14 @@ export default {
       }],
       selectedFile: null,
       url: '',
-      loading: false
+      loading: false,
+      value: null,
+      option: ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Andaman and Nicobar', 'Chandigarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Lakshadweep', 'Delhi', 'Puducherry'],
+      selected: '',
+      states: [],
+      rname: '',
+      wlpa: '',
+      iucn: ''
     }
   },
   methods: {
@@ -443,12 +529,18 @@ export default {
         data: {
           name: this.name,
           scientificName: this.scientificName,
-          reginonalNames: this.reginonalNames,
+          states: this.states,
+          rname: this.rname,
           distribution: this.distribution,
           characteristics: this.characteristics,
           description: this.description,
           venomType: this.venomType,
-          family: this.family
+          family: this.family,
+          occurence: this.occurence,
+          wlpa: this.wlpa,
+          iucn: this.iucn,
+          shortdes: this.shortdes,
+          othernames: this.othernames
         }
         // headers: {
         //   Authorization: localStorage.getItem("token")

@@ -105,7 +105,7 @@ export default {
           id: vm.item
         }
       }).then(response => {
-        alert('Successfully Approved Item')
+        alert('User was successfully Approved')
         this.getList()
       }).catch(e => {
         console.log(e)

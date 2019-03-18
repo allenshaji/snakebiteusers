@@ -9,7 +9,7 @@
     <div class="col-md-12 grid-margin">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title mb-0">Snake List</h4>
+          <h4 class="card-title mb-0">Snake Reports List</h4>
             <div class="justify-content-centermy-1 row">
                  <b-form-fieldset horizontal label="Rows per page" class="col-6">
                   <b-form-select :options="[{text:20,value:20},{text:30,value:30},{text:50,value:50}]" v-model="perPage">
@@ -100,7 +100,7 @@ export default {
           id: vm.item
         }
       }).then(response => {
-        alert('Successfully Deleted Snake')
+        alert('Successfully Deleted Reports')
         this.getList()
         this.loading = false
       }).catch(e => {

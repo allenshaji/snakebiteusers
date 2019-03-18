@@ -57,7 +57,7 @@
           <li class="nav-item"><router-link class="nav-link" to="/newuserlist/"><img class="menu-icon" src="../../assets/images/menu_icons/02.png" alt="menu icon"><span class="menu-title">New Users</span></router-link></li>
           <li class="nav-item"><router-link class="nav-link" to="/rescuerlist/"><img class="menu-icon" src="../../assets/images/menu_icons/03.png" alt="menu icon"><span class="menu-title">Rescuer List</span></router-link></li>
           <li class="nav-item"><router-link class="nav-link" to="/rescuerapproval/"><img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon"><span class="menu-title">Approve Rescuers</span></router-link></li>
-          <li class="nav-item"><router-link class="nav-link" to="/locations/"><img class="menu-icon" src="../../assets/images/menu_icons/01.png" alt="menu icon"><span class="menu-title">Locations</span></router-link></li>
+          <li class="nav-item"><router-link class="nav-link" to="/locations/"><img class="menu-icon" src="../../assets/images/menu_icons/01.png" alt="menu icon"><span class="menu-title">Snake Reports</span></router-link></li>
       </ul>
     </nav>
   </section>
