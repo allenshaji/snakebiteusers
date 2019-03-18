@@ -52,6 +52,11 @@
                   </div>
                 <a @click="addNewDetect" style="color:red;"><i>Add Another State</i></a> -->
                        <div class="row">
+                              <div class="col-md-6">
+                  <b-form-group description="Other Names" horizontal label="Other Names">
+                    <b-form-input type="text" v-model="othernames"></b-form-input>
+                  </b-form-group>
+                </div>
                     <div class="col-md-6">
                        <b-form-group horizontal label="State">
                   <v-select multiple v-model="states" :options="option"></v-select>
@@ -241,6 +246,7 @@ export default {
       name: '',
       scientificName: '',
       distribution: '',
+      othernames: '',
       characteristics: '',
       description: '',
       family: '',
@@ -313,6 +319,7 @@ export default {
         this.iucn = d.iucn
         this.shortdes = d.shortdes
         this.rname = d.rname
+        this.othernames = d.othernames
         // var temp = []
         // for (var i = 0; i < d.reginonalNames.length; i++) {
         //   var ty = {
@@ -359,7 +366,8 @@ export default {
           occurence: this.occurence,
           wlpa: this.wlpa,
           iucn: this.iucn,
-          shortdes: this.shortdes
+          shortdes: this.shortdes,
+          othernames: this.othernames
         }
         // headers: {
         //   Authorization: localStorage.getItem("token")
