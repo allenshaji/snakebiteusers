@@ -359,6 +359,11 @@
                     <vue-editor v-model="shortdes" required=""></vue-editor>
                   </b-form-group>
                 </div>
+                 <div class="col-md-6">
+                       <b-form-group horizontal label="Assign to Expert">
+                  <v-select multiple v-model="experts" :options="expert" required=""></v-select>
+                   </b-form-group>
+                  </div>
                 </div>
                 <!-- <div class="row">
                 <div class="col-md-4">
@@ -484,10 +489,36 @@ export default {
       states: [],
       rname: '',
       wlpa: '',
-      iucn: ''
+      iucn: '',
+      items: [],
+      experts: [],
+      expert: []
     }
   },
+  mounted: function () {
+    this.getExperts()
+  },
   methods: {
+    getExperts () {
+      this.loading = true
+      axios({
+        url: 'http://18.191.40.18/user/experts',
+        method: 'GET'
+      }).then(response => {
+        console.log(response.data.data)
+        this.items = response.data.data
+        var temp = []
+        for (var i = 0; i < this.items.length; i++) {
+          var ty = this.items[i].name
+          temp.push(ty)
+        }
+        this.expert = temp
+        this.loading = false
+      }).catch(e => {
+        console.log(e)
+        this.errors.push(e)
+      })
+    },
     onFileChanged (event) {
       this.selectedFile = event.target.files[0]
       this.url = URL.createObjectURL(this.selectedFile)
@@ -523,6 +554,16 @@ export default {
       // formData.append('family', this.family)
       // formData.append('venomType', this.venomType)
       this.loading = true
+      var temp = []
+      for (var i = 0; i < this.items.length; i++) {
+        for (var j = 0; j < this.experts.length; j++) {
+          if (this.items[i].name === this.experts[j]) {
+            var ty = this.items[i]._id
+            temp.push(ty)
+          }
+        }
+      }
+      console.log(temp)
       axios({
         method: 'post',
         url: 'http://18.191.40.18/snake/',
@@ -540,7 +581,8 @@ export default {
           wlpa: this.wlpa,
           iucn: this.iucn,
           shortdes: this.shortdes,
-          othernames: this.othernames
+          othernames: this.othernames,
+          experts: temp
         }
         // headers: {
         //   Authorization: localStorage.getItem("token")

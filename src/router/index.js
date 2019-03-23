@@ -33,6 +33,7 @@ import rescuerlist from '../views/forms/rescuerlist'
 import rescuerapproval from '../views/forms/rescuerapproval'
 import locations from '../views/forms/locations.vue'
 import snakedetails from '../views/forms/snakedetails.vue'
+import addexperts from '../views/forms/addexperts.vue'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -178,6 +179,11 @@ export default new Router({
     path: '/locations',
     name: 'locations',
     component: locations
+  },
+  {
+    path: '/addexperts',
+    name: 'addexperts',
+    component: addexperts
   },
   {
     path: '/editsnake/:id',

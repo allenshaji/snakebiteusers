@@ -162,6 +162,11 @@
                     <vue-editor v-model="shortdes" required=""></vue-editor>
                   </b-form-group>
                 </div>
+                 <div class="col-md-6">
+                       <b-form-group horizontal label="Assign to Expert">
+                  <v-select multiple v-model="experts" :options="expert" required=""></v-select>
+                   </b-form-group>
+                  </div>
                 </div>
                 <!-- <div class="row">
                 <div class="col-md-4">
@@ -273,13 +278,36 @@ export default {
       rname: '',
       wlpa: '',
       iucn: '',
-      shortdes: ''
+      shortdes: '',
+      items1: [],
+      experts: [],
+      expert: []
     }
   },
   mounted: function () {
-    this.getAll()
+    this.getExperts()
   },
   methods: {
+    getExperts () {
+      this.loading = true
+      axios({
+        url: 'http://18.191.40.18/user/experts',
+        method: 'GET'
+      }).then(response => {
+        this.items1 = response.data.data
+        var temp = []
+        for (var i = 0; i < this.items1.length; i++) {
+          var ty = this.items1[i].name
+          temp.push(ty)
+        }
+        this.expert = temp
+        this.loading = false
+        this.getAll()
+      }).catch(e => {
+        console.log(e)
+        this.errors.push(e)
+      })
+    },
     onFileChanged (event) {
       this.selectedFile = event.target.files[0]
       this.url = URL.createObjectURL(this.selectedFile)
@@ -299,6 +327,7 @@ export default {
     },
     getAll () {
       this.loading = true
+      console.log(this.items1)
       axios({
         url: 'http://18.191.40.18/snake/' + this.id,
         method: 'POST'
@@ -320,6 +349,21 @@ export default {
         this.shortdes = d.shortdes
         this.rname = d.rname
         this.othernames = d.othernames
+        var temp = []
+        if (d.experts.length > 0) {
+          for (var p = 0; p < this.items1.length; p++) {
+            for (var i = 0; i < d.experts.length; i++) {
+              console.log(d.experts[i])
+              console.log(this.items1[p]._id)
+              if (d.experts[i] === this.items1[p]._id) {
+                var ty = this.items1[p].name
+                temp.push(ty)
+              }
+            }
+          }
+        }
+        console.log(temp)
+        this.experts = temp
         // var temp = []
         // for (var i = 0; i < d.reginonalNames.length; i++) {
         //   var ty = {
@@ -349,6 +393,15 @@ export default {
     onSubmit (evt) {
       evt.preventDefault()
       this.loading = true
+      var temp = []
+      for (var i = 0; i < this.items1.length; i++) {
+        for (var j = 0; j < this.experts.length; j++) {
+          if (this.items1[i].name === this.experts[j]) {
+            var ty = this.items1[i]._id
+            temp.push(ty)
+          }
+        }
+      }
       axios({
         method: 'post',
         url: 'http://18.191.40.18/snake/edit',
@@ -367,7 +420,8 @@ export default {
           wlpa: this.wlpa,
           iucn: this.iucn,
           shortdes: this.shortdes,
-          othernames: this.othernames
+          othernames: this.othernames,
+          experts: temp
         }
         // headers: {
         //   Authorization: localStorage.getItem("token")
@@ -376,7 +430,7 @@ export default {
         .then(response => {
           alert('Successfully Updated Data')
           this.loading = false
-          this.getAll()
+          this.getExperts()
         })
         .catch(e => {
           this.loading = false
