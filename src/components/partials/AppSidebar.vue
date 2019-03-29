@@ -72,7 +72,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.app-sidebar {
-
-}
 </style>

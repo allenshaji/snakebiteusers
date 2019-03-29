@@ -208,18 +208,19 @@
           <div class="card-body" v-if = "id == ''">
             <h4 class="card-title">Enter the details</h4>
             <form class="form-sample" @submit="onSubmit">
+              <p style="color:red;">{{err}}</p>
               <p class="card-description">
                 <strong>Basic info</strong>
               </p>
               <div class="row">
                 <div class="col-md-6">
                   <b-form-group horizontal label="Common Name" description="Common Name" label-for="input14">
-                    <b-form-input type="text" v-model="name"></b-form-input>
+                    <b-form-input type="text" v-model="name" required></b-form-input>
                   </b-form-group>
                 </div>
                 <div class="col-md-6">
                   <b-form-group description="Scientic Name" horizontal label="Scientic Name">
-                    <b-form-input type="text" v-model="scientificName"></b-form-input>
+                    <b-form-input type="text" v-model="scientificName" required></b-form-input>
                   </b-form-group>
                   </div>
                   </div>
@@ -349,19 +350,19 @@
                 </div>
                 <div class="col-md-6">
                   <b-form-group horizontal label="Morphology" >
-                    <vue-editor v-model="description" required=""></vue-editor>
+                    <vue-editor v-model="description" ></vue-editor>
                   </b-form-group>
                 </div>
                 </div>
                  <div class="row">
                 <div class="col-md-6">
                   <b-form-group horizontal label="Short Description" >
-                    <vue-editor v-model="shortdes" required=""></vue-editor>
+                    <vue-editor v-model="shortdes"></vue-editor>
                   </b-form-group>
                 </div>
                  <div class="col-md-6">
                        <b-form-group horizontal label="Assign to Expert">
-                  <v-select multiple v-model="experts" :options="expert" required=""></v-select>
+                  <v-select multiple v-model="experts" :options="expert" ></v-select>
                    </b-form-group>
                   </div>
                 </div>
@@ -492,7 +493,8 @@ export default {
       iucn: '',
       items: [],
       experts: [],
-      expert: []
+      expert: [],
+      err: ''
     }
   },
   mounted: function () {
@@ -536,6 +538,7 @@ export default {
       })
     },
     resetForm () {
+      this.err = ''
       this.author = ''
       this.caption = ''
       this.selectedFile = ''
@@ -595,7 +598,8 @@ export default {
         })
         .catch(e => {
           this.loading = false
-          alert('Failed')
+          this.err = e.response.data.msg
+          alert(this.err)
         })
     },
     imagesubmit (evt) {
