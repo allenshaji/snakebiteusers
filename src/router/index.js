@@ -34,6 +34,7 @@ import rescuerapproval from '../views/forms/rescuerapproval'
 import locations from '../views/forms/locations.vue'
 import snakedetails from '../views/forms/snakedetails.vue'
 import addexperts from '../views/forms/addexperts.vue'
+import expertslist from '../views/forms/expertslist.vue'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -169,6 +170,11 @@ export default new Router({
     path: '/rescuerlist',
     name: 'rescuerlist',
     component: rescuerlist
+  },
+  {
+    path: '/expertslist',
+    name: 'expertslist',
+    component: expertslist
   },
   {
     path: '/rescuerapproval',

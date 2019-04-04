@@ -9,86 +9,60 @@
       <div class="col-12 grid-margin">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">{{name}} <i>({{scientificName}})</i></h4>
+            <div class="row">
+            <div class="col-md-8">
+  <b-carousel
+    id="carousel-no-animation"
+    style="text-shadow: 0px 0px 2px #000"
+    no-animation
+    indicators
+  >
+    <b-carousel-slide v-for = "pic in photographs" v-bind:key="pic.url"
+      v-bind:caption="pic.caption"
+     v-bind:img-src="'http://18.191.40.18/u/'+pic.url"
+    ></b-carousel-slide>
+  </b-carousel>
+            </div>
+            <div class="col-md-4">
+                 <h4 class="card-title">{{name}} <i>({{scientificName}})</i></h4>
+                 <div class="big4" v-if = "venomType == 'Highly Venomous' " style="color:red;">
+            <b>{{venomType}}</b>
+            </div>
+            <div class="big4" v-if = "venomType == 'Mildly Venomous' " style="color:orange;">
+            <b>{{venomType}}</b>
+            </div>
+             <div class="big4" v-if = "venomType == 'Non Venomous' " style="color:green;">
+            <b>{{venomType}}</b>
+            </div>
+             <div class="big4">
+             <b>Regional Names:</b> {{rname}}
+            </div>
             <div class="big4">
-             Venom Type: {{venomType}}
+             <b>Family:</b> {{family}}
             </div>
              <div class="big4">
-             States: <a v-for="s in states" v-bind:key="s">{{s}},&nbsp;</a>
-            </div>
-             <div class="big4">
-             Regional Names: {{rname}}
+             <b>Distribution:</b> {{distribution}}
             </div>
             <div class="big4">
-             Family: {{family}}
-            </div>
-             <div class="big4">
-             Distribution: {{distribution}}
-            </div>
-             <div class="big4">
              WLPA: {{wlpa}}
             </div>
              <div class="big4">
              IUCN: {{iucn}}
             </div>
+            </div>
+            </div>
+            <br><br>
             <div class="big4">
-             Scalation: <span v-html="characteristics"></span>
+             <b>Scalation:</b> <span v-html="characteristics"></span>
             </div>
             <div class="big4">
-             Morphology: <span v-html="description"></span>
+             <b>Morphology:</b> <span v-html="description"></span>
+            </div>
+             <div class="big4">
+             <b>States:</b> <a v-for="s in states" v-bind:key="s">{{s}},&nbsp;</a>
             </div>
           </div>
           <hr>
-                  <div class="card-body">
-                   <h4 class="card-title">Add New Images</h4>
-                   <form class="form-sample" @submit="imagesubmit">
-                  <div class="row">
-                <div class="col-md-3">
-                  <input type="file" accept="image/*" id="file" ref="file" required="" @change="onFileChanged">
-             <div id="preview">
-           <img v-if="url" :src="url" />
-            </div>
-             </div>
-            <div class="col-md-3">
-                  <b-form-group horizontal label="Caption" label-for="input15">
-                    <b-form-input type="text"  v-model="caption"></b-form-input>
-                  </b-form-group>
-                </div>
-                <div class="col-md-3">
-                  <b-form-group horizontal label="Author" label-for="input15">
-                    <b-form-input type="text"  v-model="author"></b-form-input>
-                  </b-form-group>
-                </div>
-                <div class="col-md-3"> <b-button variant="primary" class="btn-fw" type="submit">Add New Image</b-button></div>
-              </div>
-              </form>
-                </div>
-                <hr>
-                  <div class="card-body">
-                   <h4 class="card-title">View Images</h4>
-                   <div>{{photos[0]}}
-  <b-carousel
-    id="carousel-fade"
-    style="text-shadow: 0px 0px 2px #000"
-    fade
-    indicators
-    img-width="1024"
-    img-height="480"
-  >
-    <b-carousel-slide caption="First slide" img:src="http://18.191.40.18/u/f218fc9170c54566c4eeea7a4efcc360" />
-    <b-carousel-slide caption="Second Slide" img-src="https://picsum.photos/1024/480/?image=12" />
-    <b-carousel-slide caption="Third Slide" img-src="https://picsum.photos/1024/480/?image=22" />
-  </b-carousel>
-</div>
-                  <div class="row" v-for = "pic in photographs" v-bind:key="pic.url" style="margin-top:20px;">
-                <div class="col-md-4">
-                  <img v-bind:src="'http://18.191.40.18/u/'+pic.url" height="auto" width="100%" />
-             </div>
-             <div class="col-md-4">
-                <button class="btn btn-danger" @click="deleteImage(pic)">Delete</button>
-             </div>
-              </div>
-                </div>
         </div>
       </div>
     </div>
@@ -141,7 +115,8 @@ export default {
       wlpa: '',
       iucn: '',
       shortdes: '',
-      photos: []
+      photos: [],
+      banners: ['//placehold.it/1200x600', '//placehold.it/1200x600/333/fff', '//placehold.it/1200x600/cc2222']
     }
   },
   mounted: function () {

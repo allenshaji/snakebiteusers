@@ -27,6 +27,10 @@
                    <button class="btn btn-primary" @click="approve(item)" v-if="item.item.status == false">Approve</button>
                    <button class="btn btn-warning" v-if="item.item.status == true">Already Approved</button>
                   </template>
+                  <template id="pdcy" slot="status" slot-scope="item">
+                    <!-- <router-link :to="'/view/' + item.item._id">Approve</router-link> -->
+                   <button class="btn btn-danger" @click="deleteUser(item)">Delete</button>
+                  </template>
                 </b-table>
               </template>
                <div class="justify-content-center row my-1">
@@ -65,6 +69,10 @@ export default {
           key: '_id',
           label: 'Approve',
           sortable: true
+        },
+        {
+          key: 'status',
+          label: 'Delete'
         }
       ],
       currentPage: 1,
@@ -109,6 +117,28 @@ export default {
         this.getList()
       }).catch(e => {
         console.log(e)
+      })
+    },
+    deleteUser: function (item) {
+      var vm = this
+      vm.item = item.item._id
+      this.loading = true
+      axios({
+        method: 'DELETE',
+        // headers: {
+        //             Authorization: localStorage.getItem("token")
+        //         },
+        url: 'http://18.191.40.18/user/delete',
+        data: {
+          id: vm.item
+        }
+      }).then(response => {
+        alert('Successfully Deleted User')
+        this.loading = false
+        this.getList()
+      }).catch(e => {
+        console.log(e)
+        this.loading = false
       })
     }
   }

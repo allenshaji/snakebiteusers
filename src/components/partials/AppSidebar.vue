@@ -5,7 +5,7 @@
       <ul class="nav">
         <li class="nav-item nav-profile">
           <div class="nav-link">
-            <div class="profile-image"> <img src="../../assets/images/faces/face4.jpg" alt="image"/> <span class="online-status online"></span> </div>
+            <!-- <div class="profile-image"> <img src="../../assets/images/faces/face4.jpg" alt="image"/> <span class="online-status online"></span> </div> -->
             <div class="profile-name">
               <p class="name">Allen Shaji</p>
               <p class="designation">Admin</p>
@@ -59,6 +59,7 @@
           <li class="nav-item"><router-link class="nav-link" to="/rescuerapproval/"><img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon"><span class="menu-title">Approve Rescuers</span></router-link></li>
           <li class="nav-item"><router-link class="nav-link" to="/locations/"><img class="menu-icon" src="../../assets/images/menu_icons/01.png" alt="menu icon"><span class="menu-title">Snake Reports</span></router-link></li>
            <li class="nav-item"><router-link class="nav-link" to="/addexperts/"><img class="menu-icon" src="../../assets/images/menu_icons/08.png" alt="menu icon"><span class="menu-title">Add Snake Experts</span></router-link></li>
+            <li class="nav-item"><router-link class="nav-link" to="/expertslist/"><img class="menu-icon" src="../../assets/images/menu_icons/09.png" alt="menu icon"><span class="menu-title">Experts List</span></router-link></li>
       </ul>
     </nav>
   </section>

@@ -76,7 +76,7 @@
           <b-dropdown-item href="#">Profile</b-dropdown-item>
           <b-dropdown-item href="#">Signout</b-dropdown-item>
         </b-nav-item-dropdown>
-        <b-nav-item href="#"><img class="img-xs rounded-circle" src="../../assets/images/faces/face4.jpg" alt="profile image"></b-nav-item>
+        <!-- <b-nav-item href="#"><img class="img-xs rounded-circle" src="../../assets/images/faces/face4.jpg" alt="profile image"></b-nav-item> -->
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
