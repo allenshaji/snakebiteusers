@@ -12,10 +12,12 @@
             <div class="row">
             <div class="col-md-8">
   <b-carousel
-    id="carousel-no-animation"
+     id="carousel-fade"
     style="text-shadow: 0px 0px 2px #000"
-    no-animation
-    indicators
+    fade
+    :interval="4000"
+      controls
+      indicators
   >
     <b-carousel-slide v-for = "pic in photographs" v-bind:key="pic.url"
       v-bind:caption="pic.caption"
@@ -25,6 +27,9 @@
             </div>
             <div class="col-md-4">
                  <h4 class="card-title">{{name}} <i>({{scientificName}})</i></h4>
+                 <div class="big4">
+             <i>{{othernames}}</i>
+            </div>
                  <div class="big4" v-if = "venomType == 'Highly Venomous' " style="color:red;">
             <b>{{venomType}}</b>
             </div>
@@ -95,6 +100,7 @@ export default {
       caption: '',
       author: '',
       occurence: '',
+      othernames: '',
       reginonalNames: [{
         name: null,
         state: null
@@ -162,6 +168,7 @@ export default {
         this.iucn = d.iucn
         this.shortdes = d.shortdes
         this.rname = d.rname
+        this.othernames = d.othernames
         // var temp = []
         // for (var i = 0; i < d.reginonalNames.length; i++) {
         //   var ty = {

@@ -5,7 +5,9 @@ import App from './App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import VueCarousel from '@chenfengyuan/vue-carousel'
+import Vuex from 'vuex'
 
+Vue.use(Vuex)
 Vue.component(VueCarousel.name, VueCarousel)
 Vue.use(BootstrapVue)
 

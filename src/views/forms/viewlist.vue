@@ -110,6 +110,23 @@ export default {
         this.errors.push(e)
       })
     },
+    // getExpertList () {
+    //   this.loading = true
+    //   axios({
+    //     url: 'http://18.191.40.18/snake/expert/get',
+    //     method: 'POST',
+    //     data: {
+    //       id: '5ca702622552a060de0803e0'
+    //     }
+    //   }).then(response => {
+    //     console.log(response.data.data)
+    //     this.items = response.data.data
+    //     this.loading = false
+    //   }).catch(e => {
+    //     console.log(e)
+    //     this.errors.push(e)
+    //   })
+    // },
     deleteSnake: function (item) {
       var vm = this
       vm.item = item.item._id

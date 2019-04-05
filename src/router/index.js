@@ -41,15 +41,20 @@ import error500 from '../views/sample-pages/error-500'
 import login from '../views/sample-pages/login'
 import register from '../views/sample-pages/register'
 
+import store from '../store'
+
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   linkActiveClass: 'active',
   mode: 'history',
   routes: [{
     path: '/',
     name: 'dashboard',
-    component: dashboard
+    component: dashboard,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/widgets',
@@ -204,3 +209,25 @@ export default new Router({
     props: true
   }]
 })
+
+router.beforeEach((to, from, next) => {
+  // check if the route requires authentication and user is not logged in
+  if (to.matched.some(route => route.meta.requiresAuth) && !store.state.isLoggedIn) {
+    // redirect to login page
+    next({
+      name: 'login'
+    })
+    return
+  }
+
+  // if logged in redirect to dashboard
+  if (to.path === '/login' && store.state.isLoggedIn) {
+    next({
+      path: '/'
+    })
+    return
+  }
+  next()
+})
+
+export default router

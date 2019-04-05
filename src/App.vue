@@ -1,9 +1,9 @@
 <template lang="html">
   <div id="app">
     <div class="container-scroller">
-      <app-header/>
+      <app-header v-if="showMenu"/>
       <div class="container-fluid page-body-wrapper">
-        <app-sidebar/>
+        <app-sidebar v-if="showMenu"/>
         <div class="main-panel">
           <div class="content-wrapper">
             <router-view></router-view>
@@ -25,6 +25,11 @@ export default{
     AppHeader,
     AppSidebar,
     AppFooter
+  },
+  computed: {
+    showMenu () {
+      return this.$route.name !== 'login' && this.$route.name !== 'register'
+    }
   }
 }
 </script>

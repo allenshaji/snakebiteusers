@@ -1,7 +1,7 @@
 <template lang="html">
 
   <section class="app-sidebar">
-    <nav class="sidebar sidebar-offcanvas" id="sidebar" v-if="is_admin == 'true'">
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
       <ul class="nav">
         <li class="nav-item nav-profile">
           <div class="nav-link">
@@ -9,7 +9,7 @@
             <div class="profile-name">
               <p class="name" style="text-transform:capitalize;">{{username}}</p>
               <p class="designation">Admin</p>
-              <div class="badge badge-teal mx-auto mt-3">Online</div>
+              <div class="badge badge-teal mx-auto mt-3">Online</div>{{is_admin}}
             </div>
           </div>
         </li>
@@ -51,30 +51,6 @@
         </li> -->
         <!-- <li class="nav-item"><router-link class="nav-link" to="/tables/"><img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon"><span class="menu-title">Tables</span></router-link></li>
         <li class="nav-item"><router-link class="nav-link" to="/icons/"><img class="menu-icon" src="../../assets/images/menu_icons/07.png" alt="menu icon"><span class="menu-title">Icons</span></router-link></li> -->
-        <li class="nav-item"><router-link class="nav-link" to="/forms/"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">Add Snakes</span></router-link></li>
-         <li class="nav-item"><router-link class="nav-link" to="/viewlist/"><img class="menu-icon" src="../../assets/images/menu_icons/07.png" alt="menu icon"><span class="menu-title">View Snakes</span></router-link></li>
-          <li class="nav-item"><router-link class="nav-link" to="/userlist/"><img class="menu-icon" src="../../assets/images/menu_icons/05.png" alt="menu icon"><span class="menu-title">All Users</span></router-link></li>
-          <li class="nav-item"><router-link class="nav-link" to="/newuserlist/"><img class="menu-icon" src="../../assets/images/menu_icons/02.png" alt="menu icon"><span class="menu-title">New Users</span></router-link></li>
-          <li class="nav-item"><router-link class="nav-link" to="/rescuerlist/"><img class="menu-icon" src="../../assets/images/menu_icons/03.png" alt="menu icon"><span class="menu-title">Rescuer List</span></router-link></li>
-          <li class="nav-item"><router-link class="nav-link" to="/rescuerapproval/"><img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon"><span class="menu-title">Approve Rescuers</span></router-link></li>
-          <li class="nav-item"><router-link class="nav-link" to="/locations/"><img class="menu-icon" src="../../assets/images/menu_icons/01.png" alt="menu icon"><span class="menu-title">Snake Reports</span></router-link></li>
-           <li class="nav-item"><router-link class="nav-link" to="/addexperts/"><img class="menu-icon" src="../../assets/images/menu_icons/08.png" alt="menu icon"><span class="menu-title">Add Snake Experts</span></router-link></li>
-            <li class="nav-item"><router-link class="nav-link" to="/expertslist/"><img class="menu-icon" src="../../assets/images/menu_icons/09.png" alt="menu icon"><span class="menu-title">Experts List</span></router-link></li>
-      </ul>
-    </nav>
- <nav class="sidebar sidebar-offcanvas" id="sidebar" v-else>
-          <ul class="nav">
-        <li class="nav-item nav-profile">
-          <div class="nav-link">
-            <!-- <div class="profile-image"> <img src="../../assets/images/faces/face4.jpg" alt="image"/> <span class="online-status online"></span> </div> -->
-            <div class="profile-name">
-              <p class="name" style="text-transform:capitalize;">{{username}}</p>
-              <p class="designation">User</p>
-              <div class="badge badge-teal mx-auto mt-3">Online</div>
-            </div>
-          </div>
-        </li>
-        <li class="nav-item"><router-link class="nav-link" to="/"><img class="menu-icon" src="../../assets/images/menu_icons/01.png" alt="menu icon"><span class="menu-title">Dashboard</span></router-link></li>
          <li class="nav-item"><router-link class="nav-link" to="/viewlist/"><img class="menu-icon" src="../../assets/images/menu_icons/07.png" alt="menu icon"><span class="menu-title">View Snakes</span></router-link></li>
       </ul>
     </nav>

@@ -18,7 +18,7 @@
           <template slot="button-content">
             <div class="count-indicator">
               <i class="icon mdi mdi-email-variant"></i>
-              <span class="count">7</span>
+              <!-- <span class="count">7</span> -->
             </div>
           </template>
           <b-dropdown-item class="preview-item" href="#">
@@ -70,11 +70,11 @@
           <template slot="button-content">
             <div class="count-indicator">
               <i class="icon mdi mdi-bell-ring"></i>
-              <span class="count">4</span>
+              <!-- <span class="count">4</span> -->
             </div>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Signout</b-dropdown-item>
+          <b-dropdown-item @click="logout()">Signout</b-dropdown-item>
         </b-nav-item-dropdown>
         <!-- <b-nav-item href="#"><img class="img-xs rounded-circle" src="../../assets/images/faces/face4.jpg" alt="profile image"></b-nav-item> -->
       </b-navbar-nav>
@@ -83,8 +83,30 @@
 </template>
 
 <script lang="js">
+import axios from 'axios'
+import store from '../../store'
 export default {
-  name: 'app-header'
+  name: 'app-header',
+  methods: {
+    logout () {
+      axios
+        .get(`http://api.wildlifeconflict.com/user/logout`, {
+          headers: {
+            Authorization: localStorage.getItem('token')
+          }
+        })
+        .then(response => {
+          localStorage.removeItem('token')
+          store.commit('logoutUser')
+          this.$router.push({ name: 'login' })
+        })
+        .catch(e => {
+          localStorage.removeItem('token')
+          store.commit('logoutUser')
+          this.$router.push({ name: 'login' })
+        })
+    }
+  }
 }
 </script>
 
