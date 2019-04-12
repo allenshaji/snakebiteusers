@@ -65,6 +65,7 @@ export default {
           localStorage.setItem('token', response.data.data.token)
           localStorage.setItem('username', response.data.data.username)
           localStorage.setItem('is_admin', response.data.data.is_admin)
+          localStorage.setItem('id', response.data.data.id)
           this.$router.push('/')
         })
         .catch(e => {

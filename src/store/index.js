@@ -8,7 +8,8 @@ export default new Vuex.Store({
     isLoggedIn: !!localStorage.getItem('token'),
     isLog: !!localStorage.getItem('situation'),
     username: !!localStorage.getItem('username'),
-    is_admin: !!localStorage.getItem('is_admin')
+    is_admin: !!localStorage.getItem('is_admin'),
+    id: !!localStorage.getItem('id')
   },
   mutations: {
     loginUser (state) {

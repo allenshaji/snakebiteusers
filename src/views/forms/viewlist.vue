@@ -22,6 +22,9 @@
               </div>
               <template>
                 <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;">
+                  <template id="dis" slot="distribution" slot-scope="item">
+                    <div v-for="d in item.item.experts" v-bind:key="d">{{d.name}}</div>
+                  </template>
                   <template id="chr" slot="description" slot-scope="item">
                      <router-link :to="'/snakedetails/' + item.item._id">View Details</router-link>
                   </template>
@@ -56,14 +59,11 @@ export default {
         },
         {
           key: 'distribution',
-          sortable: true
+          sortable: true,
+          label: 'Experts'
         },
         {
           key: 'scientificName',
-          sortable: true
-        },
-        {
-          key: 'venomType',
           sortable: true
         },
         {
@@ -89,11 +89,18 @@ export default {
       perPage: 20,
       filter: null,
       striped: true,
-      loading: false
+      loading: false,
+      username: localStorage.getItem('username'),
+      is_admin: localStorage.getItem('is_admin'),
+      id: localStorage.getItem('id')
     }
   },
   mounted: function () {
-    this.getList()
+    if (this.is_admin === 'false') {
+      this.getExpertList()
+    } else {
+      this.getList()
+    }
   },
   methods: {
     getList () {
@@ -110,23 +117,23 @@ export default {
         this.errors.push(e)
       })
     },
-    // getExpertList () {
-    //   this.loading = true
-    //   axios({
-    //     url: 'http://18.191.40.18/snake/expert/get',
-    //     method: 'POST',
-    //     data: {
-    //       id: '5ca702622552a060de0803e0'
-    //     }
-    //   }).then(response => {
-    //     console.log(response.data.data)
-    //     this.items = response.data.data
-    //     this.loading = false
-    //   }).catch(e => {
-    //     console.log(e)
-    //     this.errors.push(e)
-    //   })
-    // },
+    getExpertList () {
+      this.loading = true
+      axios({
+        url: 'http://18.191.40.18/snake/expert/get',
+        method: 'POST',
+        data: {
+          id: this.id
+        }
+      }).then(response => {
+        console.log(response.data.data)
+        this.items = response.data.data
+        this.loading = false
+      }).catch(e => {
+        console.log(e)
+        this.errors.push(e)
+      })
+    },
     deleteSnake: function (item) {
       var vm = this
       vm.item = item.item._id
