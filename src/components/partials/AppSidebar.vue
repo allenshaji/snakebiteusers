@@ -76,6 +76,7 @@
         </li>
         <li class="nav-item"><router-link class="nav-link" to="/"><img class="menu-icon" src="../../assets/images/menu_icons/01.png" alt="menu icon"><span class="menu-title">Dashboard</span></router-link></li>
          <li class="nav-item"><router-link class="nav-link" to="/viewlist/"><img class="menu-icon" src="../../assets/images/menu_icons/07.png" alt="menu icon"><span class="menu-title">View Snakes</span></router-link></li>
+         <li class="nav-item"><router-link class="nav-link" to="/viewlistexperts/"><img class="menu-icon" src="../../assets/images/menu_icons/05.png" alt="menu icon"><span class="menu-title">View All Snakes</span></router-link></li>
       </ul>
     </nav>
   </section>
