@@ -192,6 +192,102 @@
                   </b-form-group>
                 </div>
                  <div class="col-md-6">
+                  <b-form-group horizontal label="Genus" >
+                      <b-form-select v-model="genus" class="mb-3">
+                        <option>Acrochordus</option>
+<option>Ahaetulla</option>
+<option>Amphiesma</option>
+<option>Archelaphe</option>
+<option>Argyrogena</option>
+<option>Argyrophis</option>
+<option>Atretium</option>
+<option>Blythia</option>
+<option>Boiga</option>
+<option>Brachyophidium</option>
+<option>Bungarus</option>
+<option>Calamaria</option>
+<option>Calliophis</option>
+<option>Cantoria</option>
+<option>Cerberus</option>
+<option>Chrysopelea</option>
+<option>Coelognathus</option>
+<option>Coronella</option>
+<option>Cyclophiops</option>
+<option>Daboia</option>
+<option>Dendrelaphis</option>
+<option>Dieurostus</option>
+<option>Dryocalamus</option>
+<option>Echis</option>
+<option>Elachistodon</option>
+<option>Elaphe</option>
+<option>Enhydris</option>
+<option>Eryx</option>
+<option>Euprepiophis</option>
+<option>Ferania</option>
+<option>Fordonia</option>
+<option>Fowlea</option>
+<option>Gerarda</option>
+<option>Gerrhopilus</option>
+<option>Gloydius</option>
+<option>Gongylosoma</option>
+<option>Gonyosoma</option>
+<option>Grypotyphlops</option>
+<option>Hebius</option>
+<option>Herpetoreas</option>
+<option>Homalopsis</option>
+<option>Hydrophis</option>
+<option>Hypnale</option>
+<option>Hypsiscopus</option>
+
+<option>Indotyphlops</option>
+<option>Laticauda</option>
+<option>Liopeltis</option>
+<option>Lycodon</option>
+<option>Lytorhynchus</option>
+<option>Macropisthodon</option>
+<option>Macrovipera</option>
+<option>Malayopython</option>
+<option>Melanophidium</option>
+<option>Melanophidium</option>
+<option>Myriopholis</option>
+<option>Naja</option>
+<option>Oligodon</option>
+<option>Ophiophagus</option>
+<option>Oreocryptophis</option>
+<option>Ovophis</option>
+<option>Pareas</option>
+<option>Platyceps</option>
+<option>Platyplectrurus</option>
+<option>Plectrurus</option>
+<option>Protobothrops</option>
+<option>Psammodynastes</option>
+<option>Psammophis</option>
+<option>Pseudoplectrurus</option>
+<option>Pseudoxenodon</option>
+<option>Ptyas</option>
+<option>Python</option>
+<option>Rhabdophis</option>
+<option>Rhabdops</option>
+<option>Rhinophis</option>
+<option>Sibynophis</option>
+<option>Sinomicrurus</option>
+<option>Sinonatrix</option>
+<option>Spalerosophis</option>
+<option>Stoliczkia</option>
+<option>Teretrurus</option>
+<option>Trachischium</option>
+<option>Trimeresurus</option>
+<option>Tropidolaemus</option>
+<option>Uropeltis</option>
+<option>Wallaceophis</option>
+<option>Wallophis</option>
+<option>Xenochrophis</option>
+<option>Xenopeltis</option>
+<option>Xylophis</option>
+    </b-form-select>
+                  </b-form-group>
+                </div>
+                 <div class="col-md-6">
                   <b-form-group horizontal label="Occurence" >
                     <b-form-select v-model="occurence" class="mb-3">
       <option value="Common">Common</option>
@@ -372,7 +468,8 @@ export default {
       shortdes: '',
       items1: [],
       experts: [],
-      expert: []
+      expert: [],
+      genus: ''
     }
   },
   mounted: function () {
@@ -440,6 +537,7 @@ export default {
         this.shortdes = d.shortdes
         this.rname = d.rname
         this.othernames = d.othernames
+        this.genus = d.genus
         var temp = []
         if (d.experts.length > 0) {
           for (var p = 0; p < this.items1.length; p++) {
@@ -512,7 +610,8 @@ export default {
           iucn: this.iucn,
           shortdes: this.shortdes,
           othernames: this.othernames,
-          experts: temp
+          experts: temp,
+          genus: this.genus
         }
         // headers: {
         //   Authorization: localStorage.getItem("token")
