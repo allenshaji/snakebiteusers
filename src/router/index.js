@@ -36,6 +36,7 @@ import snakedetails from '../views/forms/snakedetails.vue'
 import addexperts from '../views/forms/addexperts.vue'
 import expertslist from '../views/forms/expertslist.vue'
 import viewlistexperts from '../views/forms/viewlistexperts.vue'
+import snakebitereports from '../views/forms/snakebitereports.vue'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -196,6 +197,11 @@ let router = new Router({
     path: '/locations',
     name: 'locations',
     component: locations
+  },
+  {
+    path: '/snakebitereports',
+    name: 'snakebitereports',
+    component: snakebitereports
   },
   {
     path: '/addexperts',
