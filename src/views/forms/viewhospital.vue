@@ -23,9 +23,7 @@
               <template>
                 <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;">
                  <template id="pdcy" slot="_id" slot-scope="item">
-                    <!-- <router-link :to="'/view/' + item.item._id">Approve</router-link>
-                   <button class="btn btn-primary" @click="approve(item)" v-if="item.item.status == false">Approve</button>
-                   <button class="btn btn-warning" v-if="item.item.status == true">Already Approved</button> -->
+                 <button class="btn btn-danger" @click="deleteHospital(item)">Delete</button>
                   </template>
                 </b-table>
               </template>
@@ -60,6 +58,10 @@ export default {
         {
           key: 'mobileno',
           sortable: true
+        },
+        {
+          key: '_id',
+          label: 'Delete'
         }
       ],
       currentPage: 1,
@@ -87,7 +89,7 @@ export default {
         this.loading = false
       })
     },
-    approve: function (item) {
+    deleteHospital: function (item) {
       var vm = this
       vm.item = item.item._id
       axios({
@@ -95,12 +97,12 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/user/activate',
+        url: 'http://18.191.40.18/hospital/delete',
         data: {
           id: vm.item
         }
       }).then(response => {
-        alert('Successfully Approved Item')
+        alert('Successfully delete Item')
         this.getList()
       }).catch(e => {
         console.log(e)
