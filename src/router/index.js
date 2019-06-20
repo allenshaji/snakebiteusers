@@ -37,6 +37,8 @@ import addexperts from '../views/forms/addexperts.vue'
 import expertslist from '../views/forms/expertslist.vue'
 import viewlistexperts from '../views/forms/viewlistexperts.vue'
 import snakebitereports from '../views/forms/snakebitereports.vue'
+import addhospital from '../views/forms/addhospital.vue'
+import viewhospital from '../views/forms/viewhospital.vue'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -213,6 +215,16 @@ let router = new Router({
     name: 'editsnake',
     component: editsnake,
     props: true
+  },
+  {
+    path: '/addhospital',
+    name: 'addhospital',
+    component: addhospital
+  },
+  {
+    path: '/viewhospital',
+    name: 'viewhospital',
+    component: viewhospital
   },
   {
     path: '/snakedetails/:id',

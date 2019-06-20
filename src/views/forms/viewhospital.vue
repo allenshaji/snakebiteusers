@@ -8,7 +8,7 @@
                         </div>
     <div class="col-md-12 grid-margin">
       <div class="card">
-        <div class="card-body" v-if="items.length > 0">
+        <div class="card-body">
           <h4 class="card-title mb-0">User List</h4>
             <div class="justify-content-centermy-1 row">
                  <b-form-fieldset horizontal label="Rows per page" class="col-6">
@@ -23,19 +23,15 @@
               <template>
                 <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;">
                  <template id="pdcy" slot="_id" slot-scope="item">
-                    <!-- <router-link :to="'/view/' + item.item._id">Approve</router-link> -->
-                   <button class="btn btn-primary" @click="approve(item)" v-if="item.item.is_rescuer == false">Approve</button>
-                   <button class="btn btn-warning" v-if="item.item.is_rescuer == true">Already Approved</button>
+                    <!-- <router-link :to="'/view/' + item.item._id">Approve</router-link>
+                   <button class="btn btn-primary" @click="approve(item)" v-if="item.item.status == false">Approve</button>
+                   <button class="btn btn-warning" v-if="item.item.status == true">Already Approved</button> -->
                   </template>
                 </b-table>
               </template>
                <div class="justify-content-center row my-1">
                 <b-pagination size="md" :total-rows="this.items.length" :per-page="perPage" v-model="currentPage" />
               </div>
-        </div>
-        <div class="card-body" v-else>
-          <h4 class="card-title mb-0">Rescuer Approval List</h4><br>
-          <p>Well done admin!! All rescuers are approved</p>
         </div>
      </div>
     </div>
@@ -51,23 +47,18 @@ export default {
       items: [],
       fields: [
         {
-          key: 'username',
+          key: 'name',
           sortable: true
         },
         {
-          key: 'name'
+          key: 'district'
         },
         {
-          key: 'phone',
+          key: 'State',
           sortable: true
         },
         {
-          key: 'email',
-          sortable: true
-        },
-        {
-          key: '_id',
-          label: 'Approve',
+          key: 'mobileno',
           sortable: true
         }
       ],
@@ -85,7 +76,7 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/users/rescuers/requested',
+        url: 'http://18.191.40.18/hospital/all',
         method: 'GET'
       }).then(response => {
         console.log(response.data.data)
@@ -93,7 +84,7 @@ export default {
         this.loading = false
       }).catch(e => {
         console.log(e)
-        this.errors.push(e)
+        this.loading = false
       })
     },
     approve: function (item) {
@@ -104,7 +95,7 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/user/make/rescuer',
+        url: 'http://18.191.40.18/user/activate',
         data: {
           id: vm.item
         }
