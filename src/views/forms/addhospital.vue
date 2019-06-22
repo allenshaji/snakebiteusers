@@ -250,6 +250,20 @@
                     <b-form-input type="text" v-model="mobileno" required=""></b-form-input>
                   </b-form-group>
                   </div>
+                   <div class="col-md-6">
+                    <b-form-group horizontal label="Category">
+                    <b-form-select v-model="category" class="mb-3">
+                    <option value="Government">Government</option>
+                    <option value="Private">Private</option>
+                    <option value="Not for profit">Not for profit</option>
+                    </b-form-select>
+                  </b-form-group>
+                  </div>
+                   <div class="col-md-6">
+                    <b-form-group horizontal label="Notes">
+                    <b-form-input type="text" v-model="notes" required=""></b-form-input>
+                  </b-form-group>
+                  </div>
                   </div>
                 <hr>
                 <b-button variant="primary" class="btn-fw" type="submit">Submit</b-button>
@@ -284,7 +298,33 @@ export default {
       address: '',
       mobileno: '',
       loading: false,
-      error: ''
+      error: '',
+      category: '',
+      notes: ''
+    }
+  },
+  watch: {
+    name: function () {
+      axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + this.name + '&key=AIzaSyArDc0ju05bFkYGy4D90Dv9bAYl9hII5Ws')
+        .then(response => {
+          if (response.data.results.length === 0) {
+            this.address = ''
+            this.state = ''
+          } else {
+            this.district = response.data.results[0].address_components[0].long_name
+            this.address = response.data.results[0].formatted_address
+            this.lat = response.data.results[0].geometry.location.lat
+            this.lon = response.data.results[0].geometry.location.lng
+            for (var i = 0; i <= response.data.results[0].address_components.length; i++) {
+              if (response.data.results[0].address_components[i].types[0] === 'administrative_area_level_1') {
+                this.state = response.data.results[0].address_components[i].long_name
+              }
+            }
+          }
+        })
+        .catch(e => {
+          console.log(e)
+        })
     }
   },
   methods: {
@@ -297,6 +337,8 @@ export default {
       this.address = ''
       this.mobileno = ''
       this.error = ''
+      this.category = ''
+      this.notes = ''
     },
     onSubmit (evt) {
       evt.preventDefault()
@@ -320,7 +362,9 @@ export default {
           Districtname: this.district,
           State: this.state,
           address: this.address,
-          mobileno: this.mobileno
+          mobileno: this.mobileno,
+          category: this.category,
+          notes: this.notes
         }
         // headers: {
         //   Authorization: localStorage.getItem("token")

@@ -49,7 +49,8 @@ export default {
           sortable: true
         },
         {
-          key: 'district'
+          key: 'Districtname',
+          label: 'District Name'
         },
         {
           key: 'State',
@@ -93,7 +94,7 @@ export default {
       var vm = this
       vm.item = item.item._id
       axios({
-        method: 'POST',
+        method: 'DELETE',
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
