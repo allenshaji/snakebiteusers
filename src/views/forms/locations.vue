@@ -100,7 +100,7 @@ export default {
           var ty = {
             'createdAt': this.items[i].createdAt,
             'description': this.items[i].description,
-            'snake': this.items[i].snake.name,
+            // 'snake': this.items[i].snake.name,
             '_id': this.items[i]._id,
             'situation': this.items[i].situation,
             'pic': this.items[i].pic
