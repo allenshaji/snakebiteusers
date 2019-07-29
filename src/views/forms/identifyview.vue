@@ -21,10 +21,8 @@
                 </b-form-fieldset>
               </div>
               <template>
-                <b-table striped hover :items="itemsnew" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;">
-                   <template id="pdcy" slot="snake" slot-scope="item">{{item.item.snake}}
-                  </template>
-                  <template id="pdcy" slot="pic" slot-scope="item" style="text-align:center;"><img v-bind:src="'http://18.191.40.18/u/'+item.item.pic" width="20%" height="auto">
+                <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;">
+                  <template id="pdcy" slot="photo" slot-scope="item" style="text-align:center;"><img v-bind:src="'http://18.191.40.18/u/'+item.item.photo" width="20%" height="auto">
                   </template>
                    <template id="pdcy" slot="_id" slot-scope="item">
                   <button class="btn btn-danger" @click="deleteLocation(item)">Delete</button>
@@ -50,34 +48,29 @@ export default {
       itemsnew: [],
       fields: [
         {
-          key: 'snake',
-          label: 'Snake Name',
+          key: 'timeofincident',
+          sortable: true
+        },
+        
+        {
+          key: 'where',
+          label: 'Location'
+        },
+        {
+          key: 'issnakebite',
           sortable: true
         },
         {
-          key: 'createdAt',
-          sortable: true
-        },
-        {
-          key: 'situation',
-          sortable: true
-        },
-        {
-          key: 'description',
-          sortable: true
-        },
-         {
-          key: 'pic',
+          key: 'photo',
           label: 'Images',
           sortable: true,
-           tdClass: 'nameOfTheClass'
+          tdClass: 'nameOfTheClass'
         },
         {
           key: '_id',
           label: 'Delete',
           sortable: true
         },
-       
       ],
       currentPage: 1,
       perPage: 20,
@@ -93,25 +86,11 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/location/all/',
+        url: 'http://18.191.40.18/identify/all/',
         method: 'GET'
       }).then(response => {
-        this.items = response.data.data.records
-        var temp = []
-        for (var i = 0; i < this.items.length; i++) {
-          var ty = {
-            'createdAt': this.items[i].createdAt,
-            'description': this.items[i].description,
-            'snake': this.items[i].snake.name,
-            '_id': this.items[i]._id,
-            'situation': this.items[i].situation,
-            'pic': this.items[i].pic
-          }
-          temp.push(ty)
-        }
-        this.itemsnew = temp
-        console.log(this.itemsnew)
-        this.loading = false
+        this.items = response.data.data
+         this.loading = false
       }).catch(e => {
         console.log(e)
         this.errors.push(e)

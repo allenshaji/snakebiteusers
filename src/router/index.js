@@ -39,6 +39,7 @@ import viewlistexperts from '../views/forms/viewlistexperts.vue'
 import snakebitereports from '../views/forms/snakebitereports.vue'
 import addhospital from '../views/forms/addhospital.vue'
 import viewhospital from '../views/forms/viewhospital.vue'
+import identifyview from '../views/forms/identifyview.vue'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -164,6 +165,11 @@ let router = new Router({
     path: '/viewlist',
     name: 'viewlist',
     component: viewlist
+  },
+  {
+    path: '/identifyview',
+    name: 'identifyview',
+    component: identifyview
   },
   {
     path: '/viewlistexperts',

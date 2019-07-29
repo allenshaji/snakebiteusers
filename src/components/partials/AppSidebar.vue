@@ -63,6 +63,7 @@
              <li class="nav-item"><router-link class="nav-link" to="/snakebitereports/"><img class="menu-icon" src="../../assets/images/menu_icons/09.png" alt="menu icon"><span class="menu-title">Snakebite Reports List</span></router-link></li>
               <li class="nav-item"><router-link class="nav-link" to="/addhospital/"><img class="menu-icon" src="../../assets/images/menu_icons/01.png" alt="menu icon"><span class="menu-title">Add Hospital</span></router-link></li>
                <li class="nav-item"><router-link class="nav-link" to="/viewhospital/"><img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon"><span class="menu-title">View Hospital</span></router-link></li>
+                <li class="nav-item"><router-link class="nav-link" to="/identifyview/"><img class="menu-icon" src="../../assets/images/menu_icons/09.png" alt="menu icon"><span class="menu-title">Identification</span></router-link></li>
       </ul>
     </nav>
  <nav class="sidebar sidebar-offcanvas" id="sidebar" v-else>
