@@ -40,6 +40,7 @@ import snakebitereports from '../views/forms/snakebitereports.vue'
 import addhospital from '../views/forms/addhospital.vue'
 import viewhospital from '../views/forms/viewhospital.vue'
 import identifyview from '../views/forms/identifyview.vue'
+import identifyreply from '../views/forms/identifyreply.vue'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -220,6 +221,12 @@ let router = new Router({
     path: '/editsnake/:id',
     name: 'editsnake',
     component: editsnake,
+    props: true
+  },
+  {
+    path: '/identifyreply/:id',
+    name: 'identifyreply',
+    component: identifyreply,
     props: true
   },
   {

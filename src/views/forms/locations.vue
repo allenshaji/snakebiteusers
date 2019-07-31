@@ -66,18 +66,17 @@ export default {
           key: 'description',
           sortable: true
         },
-         {
+        {
           key: 'pic',
           label: 'Images',
           sortable: true,
-           tdClass: 'nameOfTheClass'
+          tdClass: 'nameOfTheClass'
         },
         {
           key: '_id',
           label: 'Delete',
           sortable: true
-        },
-       
+        }
       ],
       currentPage: 1,
       perPage: 20,
@@ -147,4 +146,3 @@ export default {
   max-width: 250px;
 }
 </style>
-

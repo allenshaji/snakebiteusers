@@ -21,7 +21,9 @@
                 </b-form-fieldset>
               </div>
               <template>
-                <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;"> <template id="pdcy" slot="_id" slot-scope="item">
+                <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;"> <template id="pdcy" slot="photo" slot-scope="item" style="text-align:center;"><img v-bind:src="'http://18.191.40.18/u/'+item.item.photo" width="20%" height="auto">
+                  </template>
+                   <template id="pdcy" slot="_id" slot-scope="item">
                   <button class="btn btn-danger" @click="deleteLocation(item)">Delete</button>
                   </template>
                 </b-table>
@@ -44,27 +46,19 @@ export default {
       items: [],
       fields: [
         {
-          key: 'name',
+          key: 'reporttype',
           sortable: true
         },
         {
-          key: 'sex',
+          key: 'notes',
           sortable: true
         },
         {
-          key: 'status',
+          key: 'phone',
           sortable: true
         },
         {
-          key: 'poisontype',
-          sortable: true
-        },
-        {
-          key: 'where',
-          sortable: true
-        },
-        {
-          key: 'mobileno',
+          key: 'photo',
           sortable: true
         },
         {
@@ -90,11 +84,10 @@ export default {
         url: 'http://18.191.40.18/snakebite/all',
         method: 'GET'
       }).then(response => {
-        console.log(response.data.data)
         this.items = response.data.data
         this.loading = false
       }).catch(e => {
-        console.log(e)
+        this.loading = false
         this.errors.push(e)
       })
     },
@@ -107,13 +100,13 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/location/',
+        url: 'http://18.191.40.18/snakebite/',
         data: {
           id: vm.item
         }
       }).then(response => {
-        alert('Successfully Deleted Reports')
         this.getList()
+        alert('Successfully Deleted Reports')
         this.loading = false
       }).catch(e => {
         console.log(e)

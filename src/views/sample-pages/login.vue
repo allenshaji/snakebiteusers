@@ -2,6 +2,10 @@
 
   <section class="login" style="padding-top:100px;">
     <div class="wrapper d-flex align-items-center auth login-full-bg">
+       <div id='loadingmessage' style="text-align:center;margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: white; z-index: 30001; opacity: 0.8;" v-if="loading">
+                            <p style="position: absolute; color: White; top: 30%; left: 45%;">
+                                <img src='../../assets/spinner.gif' /></p>
+                        </div>
       <div class="row w-100">
         <div class="col-lg-6 mx-auto">
           <div class="auth-form-dark text-left p-5">
@@ -44,7 +48,6 @@
 <script>
 import axios from 'axios'
 import store from '../../store'
-
 export default {
   name: 'login',
   data () {
@@ -52,11 +55,13 @@ export default {
       login: {},
       errors: [],
       duration: 200,
-      err: ''
+      err: '',
+      loading: false
     }
   },
   methods: {
     onSubmit (evt) {
+      this.loading = true
       evt.preventDefault()
       axios
         .post(`http://18.191.40.18/user/login/`, this.login)
@@ -69,10 +74,10 @@ export default {
           this.$router.push('/')
         })
         .catch(e => {
-          console.log(e.response)
           this.loginError = true
           this.err = e.response.data.msg
           this.errors.push(e)
+          this.loading = false
         })
     }
   }
@@ -81,7 +86,7 @@ export default {
 
 <style>
 .main-panel {
-    width: calc(100% - 0px);
-    min-height: calc(100vh - 58px);
+  width: calc(100% - 0px);
+  min-height: calc(100vh - 58px);
 }
 </style>

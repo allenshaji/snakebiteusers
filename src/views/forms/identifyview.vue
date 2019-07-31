@@ -24,6 +24,14 @@
                 <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;">
                   <template id="pdcy" slot="photo" slot-scope="item" style="text-align:center;"><img v-bind:src="'http://18.191.40.18/u/'+item.item.photo" width="20%" height="auto">
                   </template>
+                  <template id="pdcy" slot="issnakebite" slot-scope="item">
+                  <a v-if="item.item.issnakebite == true">Just for Knowledge</a><a v-else>Snakebite Case</a>
+                  </template>
+                   <template id="pdcy" slot="didadminreply" slot-scope="item">
+                    <!-- <router-link :to="'/view/' + item.item._id">Approve</router-link> -->
+                   <button class="btn btn-primary" v-if="item.item.didadminreply == false" style="color:white;"> <router-link :to="'/identifyreply/' + item.item._id" style="color:white;text-decoration: none;">Reply Now</router-link></button>
+                   <button class="btn btn-warning" v-if="item.item.didadminreply == true">Already Replied</button>
+                  </template>
                    <template id="pdcy" slot="_id" slot-scope="item">
                   <button class="btn btn-danger" @click="deleteLocation(item)">Delete</button>
                   </template>
@@ -51,7 +59,6 @@ export default {
           key: 'timeofincident',
           sortable: true
         },
-        
         {
           key: 'where',
           label: 'Location'
@@ -67,10 +74,14 @@ export default {
           tdClass: 'nameOfTheClass'
         },
         {
+          key: 'didadminreply',
+          label: 'Reply'
+        },
+        {
           key: '_id',
           label: 'Delete',
           sortable: true
-        },
+        }
       ],
       currentPage: 1,
       perPage: 20,
@@ -86,11 +97,14 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/identify/all/',
-        method: 'GET'
+        url: 'http://18.191.40.18/adminreply/all',
+        method: 'GET',
+        headers: {
+          'x-auth-token': localStorage.getItem('token')
+        }
       }).then(response => {
         this.items = response.data.data
-         this.loading = false
+        this.loading = false
       }).catch(e => {
         console.log(e)
         this.errors.push(e)
@@ -101,12 +115,12 @@ export default {
       vm.item = item.item._id
       this.loading = true
       axios({
-        method: 'DELETE',
-        // headers: {
-        //             Authorization: localStorage.getItem("token")
-        //         },
-        url: 'http://18.191.40.18/location/',
-        data: {
+        method: 'GET',
+        headers: {
+          'x-auth-token': localStorage.getItem('token')
+        },
+        url: 'http://18.191.40.18/adminreply/delete',
+        params: {
           id: vm.item
         }
       }).then(response => {
@@ -126,4 +140,3 @@ export default {
   max-width: 250px;
 }
 </style>
-
