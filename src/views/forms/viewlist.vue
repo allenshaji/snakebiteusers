@@ -25,6 +25,12 @@
                   <template id="dis" slot="distribution" slot-scope="item">
                     <div v-for="d in item.item.experts" v-bind:key="d">{{d.name}}</div>
                   </template>
+                    <template id="pie" slot="photographs" slot-scope="item">
+                    <div v-for="d in item.item.photographs" v-bind:key="d" >
+
+<img v-bind:src="'http://18.191.40.18/u/'+d.url" width="20%" height="auto">
+</div>
+                  </template>
                   <template id="chr" slot="description" slot-scope="item">
                      <router-link :to="'/snakedetails/' + item.item._id">View Details</router-link>
                   </template>
@@ -79,6 +85,10 @@ export default {
           key: 'characteristics',
           label: 'Delete',
           sortable: true
+        },
+        {
+          key: 'photographs',
+          label: 'Photographs'
         },
         {
           key: 'description',

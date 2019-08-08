@@ -365,10 +365,10 @@ export default {
           mobileno: this.mobileno,
           category: this.category,
           notes: this.notes
+        },
+        headers: {
+          'x-auth-token': localStorage.getItem('token')
         }
-        // headers: {
-        //   Authorization: localStorage.getItem("token")
-        // }
       })
         .then(response => {
           this.resetForm()
