@@ -41,6 +41,7 @@ import addhospital from '../views/forms/addhospital.vue'
 import viewhospital from '../views/forms/viewhospital.vue'
 import identifyview from '../views/forms/identifyview.vue'
 import identifyreply from '../views/forms/identifyreply.vue'
+import pendinghospital from '../views/forms/pendinghospital.vue'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -238,6 +239,11 @@ let router = new Router({
     path: '/viewhospital',
     name: 'viewhospital',
     component: viewhospital
+  },
+  {
+    path: '/pendinghospital',
+    name: 'pendinghospital',
+    component: pendinghospital
   },
   {
     path: '/snakedetails/:id',

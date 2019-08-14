@@ -95,9 +95,9 @@ export default {
       vm.item = item.item._id
       axios({
         method: 'DELETE',
-        // headers: {
-        //             Authorization: localStorage.getItem("token")
-        //         },
+        headers: {
+          'x-auth-token': localStorage.getItem('token')
+        },
         url: 'http://18.191.40.18/hospital/delete',
         data: {
           id: vm.item

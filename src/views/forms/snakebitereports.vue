@@ -23,6 +23,8 @@
               <template>
                 <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;"> <template id="pdcy" slot="photo" slot-scope="item" style="text-align:center;"><img v-bind:src="'http://18.191.40.18/u/'+item.item.photo" width="20%" height="auto">
                   </template>
+                  <template id="pdc" slot="added_by" slot-scope="item">{{item.item.added_by.username}} - {{item.item.added_by.phone}} - {{item.item.added_by.email}}
+                  </template>
                    <template id="pdcy" slot="_id" slot-scope="item">
                   <button class="btn btn-danger" @click="deleteLocation(item)">Delete</button>
                   </template>
@@ -46,7 +48,7 @@ export default {
       items: [],
       fields: [
         {
-          key: 'reporttype',
+          key: 'added_by',
           sortable: true
         },
         {
@@ -59,7 +61,8 @@ export default {
         },
         {
           key: 'photo',
-          sortable: true
+          sortable: true,
+          tdClass: 'nameOfTheClass'
         },
         {
           key: '_id',
@@ -116,3 +119,8 @@ export default {
   }
 }
 </script>
+<style>
+.nameOfTheClass {
+   max-width: 200px;
+}
+</style>
