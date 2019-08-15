@@ -169,15 +169,6 @@ export default {
         this.shortdes = d.shortdes
         this.rname = d.rname
         this.othernames = d.othernames
-        // var temp = []
-        // for (var i = 0; i < d.reginonalNames.length; i++) {
-        //   var ty = {
-        //     name: d.reginonalNames[i].name,
-        //     state: d.reginonalNames[i].state
-        //   }
-        //   temp.push(ty)
-        // }
-        // this.reginonalNames = temp
         var tempr = []
         var tempt = []
         for (var j = 0; j < d.photographs.length; j++) {
