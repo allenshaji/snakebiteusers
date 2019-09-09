@@ -42,6 +42,7 @@
         </div>
       </div>
       <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+        
         <div class="card card-statistics">
           <div class="card-body">
             <div class="clearfix">
@@ -60,6 +61,7 @@
             </p> -->
           </div>
         </div>
+        
       </div>
       <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
         <div class="card card-statistics">
@@ -413,9 +415,9 @@ export default {
           var id = this.records[i]._id
           var lat = this.records[i].location[0]
           var lon = this.records[i].location[1]
-          var des = this.records[i].description
           var sit = this.records[i].situation
           var snake = this.records[i].snake.name
+          var user = this.records[i].user.name
           // eslint-disable-next-line
           var latlngset = new google.maps.LatLng(lon, lat)
           var iconBase = 'http://leopardtechlabs.com/fred.png'
@@ -434,7 +436,7 @@ export default {
             '<a style="color:#333333">&emsp;&emsp;&emsp;' + lon +
             '</a></p><p style="font-size:18px;color:#333333;font-weight:500"><b>' + snake +
             '</b></p><p style="color:#333333;size:12px;">' + sit +
-            '</p><p style="color:#333333;size:12px;">' + des + '</p></td></tr></table>'
+            '</p><p style="color:#333333;size:12px;">Reported by&emsp;' + user + '</p></td></tr></table>'
           // eslint-disable-next-line
           var infowindow = new google.maps.InfoWindow()
           // eslint-disable-next-line

@@ -25,6 +25,9 @@
                  <template id="pdcy" slot="_id" slot-scope="item">
                  <button class="btn btn-danger" @click="deleteHospital(item)">Verify</button>
                   </template>
+                   <template id="pdq" slot="adminverified" slot-scope="item">
+                 <button class="btn btn-danger" @click="deleteHospitals(item)">Delete</button>
+                  </template>
                 </b-table>
               </template>
                <div class="justify-content-center row my-1">
@@ -63,6 +66,10 @@ export default {
         {
           key: '_id',
           label: 'Verify'
+        },
+        {
+          key: 'adminverified',
+          label: 'Delete'
         }
       ],
       currentPage: 1,
@@ -104,6 +111,25 @@ export default {
         }
       }).then(response => {
         alert('Successfully Verified Hospital')
+        this.getList()
+      }).catch(e => {
+        console.log(e)
+      })
+    },
+        deleteHospitals: function (item) {
+      var vm = this
+      vm.item = item.item._id
+      axios({
+        method: 'DELETE',
+        headers: {
+          'x-auth-token': localStorage.getItem('token')
+        },
+        url: 'http://18.191.40.18/hospital/delete',
+        data: {
+          id: vm.item
+        }
+      }).then(response => {
+        alert('Successfully delete Item')
         this.getList()
       }).catch(e => {
         console.log(e)

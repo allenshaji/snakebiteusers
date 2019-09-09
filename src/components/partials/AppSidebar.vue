@@ -50,6 +50,9 @@
         </li> -->
         <!-- <li class="nav-item"><router-link class="nav-link" to="/tables/"><img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon"><span class="menu-title">Tables</span></router-link></li>
         <li class="nav-item"><router-link class="nav-link" to="/icons/"><img class="menu-icon" src="../../assets/images/menu_icons/07.png" alt="menu icon"><span class="menu-title">Icons</span></router-link></li> -->
+        <li class="nav-item"><router-link class="nav-link" to="/hospitalmap/"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">Hospital Map</span></router-link></li>
+                  <li class="nav-item"><router-link class="nav-link" to="/rescuermap/"><img class="menu-icon" src="../../assets/images/menu_icons/09.png" alt="menu icon"><span class="menu-title">Rescuer Map</span></router-link></li>
+                  <li class="nav-item"><router-link class="nav-link" to="/usermap/"><img class="menu-icon" src="../../assets/images/menu_icons/05.png" alt="menu icon"><span class="menu-title">Users Map</span></router-link></li>
         <li class="nav-item"><router-link class="nav-link" to="/forms/"><img class="menu-icon" src="../../assets/images/menu_icons/04.png" alt="menu icon"><span class="menu-title">Add Snakes</span></router-link></li>
          <li class="nav-item"><router-link class="nav-link" to="/viewlist/"><img class="menu-icon" src="../../assets/images/menu_icons/07.png" alt="menu icon"><span class="menu-title">View Snakes</span></router-link></li>
           <li class="nav-item"><router-link class="nav-link" to="/userlist/"><img class="menu-icon" src="../../assets/images/menu_icons/05.png" alt="menu icon"><span class="menu-title">All Users</span></router-link></li>
@@ -64,6 +67,7 @@
                <li class="nav-item"><router-link class="nav-link" to="/viewhospital/"><img class="menu-icon" src="../../assets/images/menu_icons/06.png" alt="menu icon"><span class="menu-title">View Hospital</span></router-link></li>
                 <li class="nav-item"><router-link class="nav-link" to="/identifyview/"><img class="menu-icon" src="../../assets/images/menu_icons/09.png" alt="menu icon"><span class="menu-title">Identification Help</span></router-link></li>
                  <li class="nav-item"><router-link class="nav-link" to="/pendinghospital/"><img class="menu-icon" src="../../assets/images/menu_icons/07.png" alt="menu icon"><span class="menu-title">Approve Hospitals</span></router-link></li>
+                 
       </ul>
     </nav>
  <nav class="sidebar sidebar-offcanvas" id="sidebar" v-else>

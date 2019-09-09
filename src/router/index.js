@@ -42,6 +42,9 @@ import viewhospital from '../views/forms/viewhospital.vue'
 import identifyview from '../views/forms/identifyview.vue'
 import identifyreply from '../views/forms/identifyreply.vue'
 import pendinghospital from '../views/forms/pendinghospital.vue'
+import hospitalmap from '../views/forms/hospitalmap.vue'
+import rescuermap from '../views/forms/rescuermap.vue'
+import usermap from '../views/forms/usermap.vue'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -244,6 +247,21 @@ let router = new Router({
     path: '/pendinghospital',
     name: 'pendinghospital',
     component: pendinghospital
+  },
+  {
+    path: '/hospitalmap',
+    name: 'hospitalmap',
+    component: hospitalmap
+  },
+  {
+    path: '/rescuermap',
+    name: 'rescuermap',
+    component: rescuermap
+  },
+  {
+    path: '/usermap',
+    name: 'usermap',
+    component: usermap
   },
   {
     path: '/snakedetails/:id',
