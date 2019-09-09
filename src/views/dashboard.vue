@@ -9,9 +9,9 @@
                 <i class="mdi mdi-cube text-danger icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="card-text text-right">Total Snakes</p>
+                <p class="card-text text-right">Total Hospitals</p>
                 <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_snakes}}</h3>
+                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_hospital}}</h3>
                 </div>
               </div>
             </div>
@@ -74,6 +74,52 @@
                 <p class="card-text text-right">Total Reports</p>
                 <div class="fluid-container">
                   <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_total_locations}}</h3>
+                </div>
+              </div>
+            </div>
+            <!-- <p class="text-muted mt-3">
+              <i class="mdi mdi-reload mr-1" aria-hidden="true"></i> Product-wise sales
+            </p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 grid-margin stretch-card">
+        <div class="card card-statistics">
+          <div class="card-body">
+            <div class="clearfix">
+              <div class="float-left">
+               Top Users of Month<br>
+                <i class="mdi mdi-account-location text-info icon-lg"></i>
+              </div>
+              <div class="float-right">
+                <!-- <p class="card-text text-right">Total Hospitals</p> -->
+                <p v-for="qw in stats.topusers">{{qw.user.name}} / {{qw.count}}</p>
+                <div class="fluid-container">
+                  <h3 class="card-title font-weight-bold text-right mb-0"></h3>
+                </div>
+              </div>
+            </div>
+            <!-- <p class="text-muted mt-3">
+              <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> 65% lower growth
+            </p> -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 grid-margin stretch-card">
+        <div class="card card-statistics">
+          <div class="card-body">
+            <div class="clearfix">
+              <div class="float-left">
+                Top Snakes of Month<br>
+               <i class="mdi mdi-poll-box text-teal icon-lg"></i>
+              </div>
+              <div class="float-right">
+                 <p v-for="qw in stats.topsnakes">{{qw.snake.name}} / {{qw.count}}</p>
+                <div class="fluid-container">
+                  <h3 class="card-title font-weight-bold text-right mb-0"></h3>
                 </div>
               </div>
             </div>
