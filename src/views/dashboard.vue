@@ -131,18 +131,18 @@
         <div class="card card-statistics">
           <div class="card-body">
             <div class="clearfix">
-                <router-link to="/snakebitereports">
+                <router-link to="/viewsnakebitemanagement">
               <div class="float-left">
                 <i class="mdi mdi-receipt text-warning icon-lg"></i>
               </div>
               <div class="float-right">
                 <p class="card-text text-right">Reported Snakebites</p>
                 <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_total_experts}}</h3>
+                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_management}}</h3>
                 </div>
               </div></router-link>
             </div>
-              <router-link to="/snakebitereports">
+              <router-link to="/viewsnakebitemanagement">
             <p class="text-muted mt-3">
               <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> View Details
             </p>
@@ -227,6 +227,7 @@
     </tr>
   </tbody>
 </table>
+<p style="text-align:center"><router-link to="toprescuers">View More</router-link></p>
           </div>
         </div>
       </div>

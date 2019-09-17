@@ -347,7 +347,7 @@ export default {
         getList () {
       this.loading = true
       axios({
-       url: 'http://localhost:3000/hospital/' + this.id,
+       url: 'http://18.191.40.18/hospital/' + this.id,
         method: 'GET'
       }).then(response => {
         this.name = response.data.data.name

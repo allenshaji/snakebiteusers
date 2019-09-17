@@ -16,20 +16,31 @@
               </p>
               <p style="color:red;">{{error}}</p>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-3">
                   <b-form-group horizontal label="Date">
                     <b-form-input type="date" v-model="cdate" required=""></b-form-input>
                   </b-form-group>
                 </div>
-                 <div class="col-md-6">
+                 <div class="col-md-3">
                        <b-form-group horizontal label="State">
                   <v-select v-model="states" :options="option"></v-select>
                    </b-form-group>
                   </div>
-                
+                <div class="col-md-6">
+                       <b-form-group horizontal label="Activity at the time of bite">
+                     <b-form-select v-model="activity" class="mb-3">
+                    <option value="Farm work">Farm work</option>
+                    <option value="Sleeping in house">Sleeping in house</option>
+                    <option value="House hold activity">House hold activity</option>
+                    <option value="Walking outside">Walking outside</option>
+                    <option value="Others">Others</option>
+                    <option value="No info available">No info available</option>
+                    </b-form-select>
+                  </b-form-group>
+                  </div>
                   </div>
                        <div class="row">
-                           <div class="col-md-6">
+                           <div class="col-md-12">
                   <b-form-group horizontal label="Link to news">
                     <b-form-input type="text" v-model="link" required=""></b-form-input>
                   </b-form-group>
@@ -49,12 +60,12 @@
                     </b-form-select>
                   </b-form-group>
                   </div>
-                   <div class="col-md-6">
+                   <div class="col-md-4">
                        <b-form-group horizontal label="Affected People">
                    <b-form-input type="number" v-model="affectedpeople" required=""></b-form-input>
                    </b-form-group>
                   </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                     <b-form-group horizontal label="Status">
                    <b-form-select v-model="status" class="mb-3">
                     <option value="Died">Died</option>
@@ -64,7 +75,14 @@
                     </b-form-select>
                   </b-form-group>
                   </div>
-                   
+                    <div class="col-md-4">
+                       <b-form-group horizontal label="Hospitalized">
+                     <b-form-select v-model="hospitalized" class="mb-3">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    </b-form-select>
+                  </b-form-group>
+                  </div>
                   </div>
                 <hr>
                 <b-button variant="primary" class="btn-fw" type="submit">Submit</b-button>
@@ -102,6 +120,8 @@ export default {
       option: ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Andaman and Nicobar', 'Chandigarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Lakshadweep', 'Delhi', 'Puducherry'],
       selected: '',
       states: '',
+      activity: '',
+      hospitalized: '',
     }
   },
   methods: {
@@ -113,7 +133,9 @@ export default {
       this.affectedpeople = ''
       this.status = ''
       this.states = ''
+      this.activity = ''
       this.error = ''
+      this.hospitalized = ''
     },
     onSubmit (evt) {
       evt.preventDefault()
@@ -138,6 +160,8 @@ export default {
           affectedpeople: this.affectedpeople,
           status: this.status,
           state: this.states,
+          activity: this.activity,
+          hospitalized: this.hospitalized
         },
         headers: {
           'x-auth-token': localStorage.getItem('token')

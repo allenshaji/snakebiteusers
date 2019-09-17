@@ -20,8 +20,9 @@
                   <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
                 </b-form-fieldset>
               </div>
+              <div class="table-responsive">
               <template>
-                <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;">
+                <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;" response="true">
                   <template id="dis" slot="distribution" slot-scope="item">
                     <div v-for="d in item.item.experts" v-bind:key="d">{{d.name}}</div>
                   </template>
@@ -36,6 +37,7 @@
                   </template> -->
                 </b-table>
               </template>
+              </div>
                <div class="justify-content-center row my-1">
                 <b-pagination size="md" :total-rows="this.items.length" :per-page="perPage" v-model="currentPage" />
               </div>

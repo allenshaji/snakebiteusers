@@ -49,6 +49,7 @@ import snakebitemanagement from '../views/forms/snakebitemanagement.vue'
 import viewsnakebitemanagement from '../views/forms/viewsnakebitemanagement.vue'
 import snakereports from '../views/forms/snakereports'
 import edithospital from '../views/forms/edithospital'
+import toprescuers from '../views/forms/toprescuers'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -199,6 +200,11 @@ let router = new Router({
     path: '/rescuerlist',
     name: 'rescuerlist',
     component: rescuerlist
+  },
+  {
+    path: '/toprescuers',
+    name: 'toprescuers',
+    component: toprescuers
   },
   {
     path: '/expertslist',
