@@ -22,6 +22,9 @@
               </div>
               <template>
                 <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;">
+                   <template id="pdcy" slot="adminverified" slot-scope="item">
+                <router-link class="btn btn-success" :to="'/edithospital/' + item.item._id">Edit</router-link>
+                  </template>
                  <template id="pdcy" slot="_id" slot-scope="item">
                  <button class="btn btn-danger" @click="deleteHospital(item)">Delete</button>
                   </template>
@@ -61,6 +64,10 @@ export default {
           sortable: true
         },
         {
+          key: 'adminverified',
+          label: 'Edit'
+        },
+        {
           key: '_id',
           label: 'Delete'
         }
@@ -82,7 +89,6 @@ export default {
         url: 'http://18.191.40.18/hospital/all',
         method: 'GET'
       }).then(response => {
-        console.log(response.data.data)
         this.items = response.data.data
         this.loading = false
       }).catch(e => {

@@ -47,6 +47,8 @@ import rescuermap from '../views/forms/rescuermap.vue'
 import usermap from '../views/forms/usermap.vue'
 import snakebitemanagement from '../views/forms/snakebitemanagement.vue'
 import viewsnakebitemanagement from '../views/forms/viewsnakebitemanagement.vue'
+import snakereports from '../views/forms/snakereports'
+import edithospital from '../views/forms/edithospital'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -230,6 +232,12 @@ let router = new Router({
     props: true
   },
   {
+    path: '/edithospital/:id',
+    name: 'edithospital',
+    component: edithospital,
+    props: true
+  },
+  {
     path: '/identifyreply/:id',
     name: 'identifyreply',
     component: identifyreply,
@@ -259,6 +267,11 @@ let router = new Router({
     path: '/rescuermap',
     name: 'rescuermap',
     component: rescuermap
+  },
+  {
+    path: '/snakereports',
+    name: 'snakereports',
+    component: snakereports
   },
   {
     path: '/usermap',

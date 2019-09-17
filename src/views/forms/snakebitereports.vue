@@ -121,6 +121,6 @@ export default {
 </script>
 <style>
 .nameOfTheClass {
-   max-width: 200px;
+   min-width: 200px;
 }
 </style>

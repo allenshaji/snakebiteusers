@@ -10,6 +10,16 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title mb-0">User List</h4>
+          <div style="padding-top:20px;padding-bottom:20px;">  <download-excel
+                  class="btn btn-success btn-sm"
+                  :data="json_data"
+                  :fields="json_fields"
+                  name="filename.xls"
+                >
+
+                  Download Rescuer List
+
+                </download-excel></div>
             <div class="justify-content-centermy-1 row">
                  <b-form-fieldset horizontal label="Rows per page" class="col-6">
                   <b-form-select :options="[{text:20,value:20},{text:30,value:30},{text:50,value:50}]" v-model="perPage">
@@ -67,6 +77,19 @@ export default {
           sortable: true
         }
       ],
+      json_fields: {
+        "Username": "username",
+        "Email": "email"
+      },
+      json_data: [],
+      json_meta: [
+        [
+          {
+            key: "charset",
+            value: "utf-8"
+          }
+        ]
+      ],
       currentPage: 1,
       perPage: 20,
       filter: null,
@@ -84,8 +107,8 @@ export default {
         url: 'http://18.191.40.18/users/rescuers/all',
         method: 'GET'
       }).then(response => {
-        console.log(response.data.data)
         this.items = response.data.data
+        this.json_data = response.data.data
         this.loading = false
       }).catch(e => {
         console.log(e)

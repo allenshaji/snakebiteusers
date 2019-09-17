@@ -6,6 +6,8 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import VueCarousel from '@chenfengyuan/vue-carousel'
 import Vuex from 'vuex'
+import JsonExcel from 'vue-json-excel'
+Vue.component('downloadExcel', JsonExcel)
 
 Vue.use(Vuex)
 Vue.component(VueCarousel.name, VueCarousel)

@@ -119,7 +119,6 @@ export default {
         url: 'http://18.191.40.18/snake/all/',
         method: 'GET'
       }).then(response => {
-        console.log(response.data.data)
         this.items = response.data.data
         this.loading = false
       }).catch(e => {
@@ -136,7 +135,6 @@ export default {
           id: this.id
         }
       }).then(response => {
-        console.log(response.data.data)
         this.items = response.data.data
         this.loading = false
       }).catch(e => {
