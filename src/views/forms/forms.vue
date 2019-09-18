@@ -296,7 +296,30 @@
                 <div class="col-md-6">
                   <b-form-group horizontal label="Family" >
                       <b-form-select v-model="family" class="mb-3">
-                        <option>Acrochordus</option>
+                        <option>Acrochordidae</option>
+<option>Uropeltidae</option>
+<option>Pythonidae</option>
+<option>Xenopeltidae</option>
+<option>Erycidae</option>
+<option>Colubridae</option>
+<option>Lamprophiidae</option>
+<option>Elapidae</option>
+<option>Homalopsidae</option>
+<option>Pareatidae</option>
+<option>Xenodermatidae</option>
+<option>Viperidae</option>
+<option>Gerrhopilidae</option>
+<option>Typhlopidae</option>
+<option>Leptotyphlopidae</option>
+    </b-form-select>
+                  </b-form-group>
+                </div>
+                       <div class="col-md-6">
+                  <b-form-group horizontal label="Genus" >
+                      <b-form-select v-model="genus" class="mb-3">
+                       
+
+ <option>Acrochordus</option>
 <option>Ahaetulla</option>
 <option>Amphiesma</option>
 <option>Archelaphe</option>
@@ -386,28 +409,6 @@
 <option>Xenochrophis</option>
 <option>Xenopeltis</option>
 <option>Xylophis</option>
-    </b-form-select>
-                  </b-form-group>
-                </div>
-                       <div class="col-md-6">
-                  <b-form-group horizontal label="Genus" >
-                      <b-form-select v-model="genus" class="mb-3">
-                        <option>Acrochordidae</option>
-<option>Uropeltidae</option>
-<option>Pythonidae</option>
-<option>Xenopeltidae</option>
-<option>Erycidae</option>
-<option>Colubridae</option>
-<option>Lamprophiidae</option>
-<option>Elapidae</option>
-<option>Homalopsidae</option>
-<option>Pareatidae</option>
-<option>Xenodermatidae</option>
-<option>Viperidae</option>
-<option>Gerrhopilidae</option>
-<option>Typhlopidae</option>
-<option>Leptotyphlopidae</option>
-
     </b-form-select>
                   </b-form-group>
                 </div>

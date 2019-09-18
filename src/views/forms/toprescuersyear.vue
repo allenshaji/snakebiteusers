@@ -9,8 +9,18 @@
     <div class="col-md-12 grid-margin">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title mb-0">User List</h4>
-          <div v-if="items.length > 0">
+          <h4 class="card-title mb-0">Top Users</h4>
+           <div style="padding-top:20px;padding-bottom:20px;">  <download-excel
+                  class="btn btn-success btn-sm"
+                  :data="json_data"
+                  :fields="json_fields"
+                  name="filename.xls"
+                >
+
+                  Download as Excel
+
+                </download-excel></div>
+        
             <div class="justify-content-centermy-1 row">
                  <b-form-fieldset horizontal label="Rows per page" class="col-6">
                   <b-form-select :options="[{text:20,value:20},{text:30,value:30},{text:50,value:50}]" v-model="perPage">
@@ -23,23 +33,20 @@
               </div>
               <template>
                 <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;">
-                 <template id="pdcy" slot="_id" slot-scope="item">
-                 <button class="btn btn-danger" @click="deleteHospital(item)">Verify</button>
+                     <template id="pdcy" slot="_id" slot-scope="item">
+                   {{item.item.user.username}}
                   </template>
-                   <template id="pdq" slot="adminverified" slot-scope="item">
-                 <button class="btn btn-danger" @click="deleteHospitals(item)">Delete</button>
+                   <template id="pdcy" slot="user" slot-scope="item">
+                   {{item.item.user.email}}
+                  </template>
+                   <template id="pdcy" slot="user.phone" slot-scope="item">
+                   {{item.item.user.phone}}
                   </template>
                 </b-table>
               </template>
                <div class="justify-content-center row my-1">
                 <b-pagination size="md" :total-rows="this.items.length" :per-page="perPage" v-model="currentPage" />
               </div>
-        </div>
-        <div v-else>
-<p style="padding-top:10px;padding-bottom:10px;">
-          No hospital approvals pending
-</p>
-        </div>
         </div>
      </div>
     </div>
@@ -55,29 +62,37 @@ export default {
       items: [],
       fields: [
         {
-          key: 'name',
-          sortable: true
-        },
-        {
-          key: 'Districtname',
-          label: 'District Name'
-        },
-        {
-          key: 'State',
-          sortable: true
-        },
-        {
-          key: 'mobileno',
-          sortable: true
-        },
-        {
           key: '_id',
-          label: 'Verify'
+          sortable: true,
+          label: 'Username'
         },
         {
-          key: 'adminverified',
-          label: 'Delete'
+          key: 'user',
+          label: 'Email'
+        },
+        {
+          key: 'user.phone',
+          label: 'Phone'
+        },
+        {
+          key: 'count',
+          label: 'Count'
         }
+      ],
+      json_fields: {
+        'Username': 'user.username',
+        'Email': 'user.email',
+        'Phone': 'user.phone',
+        "Count": "count"
+      },
+      json_data: [],
+      json_meta: [
+        [
+          {
+            key: "charset",
+            value: "utf-8"
+          }
+        ]
       ],
       currentPage: 1,
       perPage: 20,
@@ -93,54 +108,17 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/hospital/allnew',
+        url: 'http://18.191.40.18/user/allstats',
         method: 'GET'
       }).then(response => {
-        this.items = response.data.data
+        this.items = response.data.data.topusersyear
+        this.json_data = response.data.data.topusersyear
         this.loading = false
       }).catch(e => {
         console.log(e)
         this.loading = false
       })
     },
-    deleteHospital: function (item) {
-      var vm = this
-      vm.item = item.item._id
-      axios({
-        method: 'POST',
-        headers: {
-          'x-auth-token': localStorage.getItem('token')
-        },
-        url: 'http://18.191.40.18/hospital/verify',
-        data: {
-          id: vm.item
-        }
-      }).then(response => {
-        alert('Successfully Verified Hospital')
-        this.getList()
-      }).catch(e => {
-        console.log(e)
-      })
-    },
-        deleteHospitals: function (item) {
-      var vm = this
-      vm.item = item.item._id
-      axios({
-        method: 'DELETE',
-        headers: {
-          'x-auth-token': localStorage.getItem('token')
-        },
-        url: 'http://18.191.40.18/hospital/delete',
-        data: {
-          id: vm.item
-        }
-      }).then(response => {
-        alert('Successfully delete Item')
-        this.getList()
-      }).catch(e => {
-        console.log(e)
-      })
-    }
   }
 }
 </script>

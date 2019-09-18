@@ -50,6 +50,8 @@ import viewsnakebitemanagement from '../views/forms/viewsnakebitemanagement.vue'
 import snakereports from '../views/forms/snakereports'
 import edithospital from '../views/forms/edithospital'
 import toprescuers from '../views/forms/toprescuers'
+import toprescuersyear from '../views/forms/toprescuersyear'
+import topcommonsnakes from '../views/forms/topcommonsnakes'
 
 import error404 from '../views/sample-pages/error-404'
 import error500 from '../views/sample-pages/error-500'
@@ -205,6 +207,16 @@ let router = new Router({
     path: '/toprescuers',
     name: 'toprescuers',
     component: toprescuers
+  },
+  {
+    path: '/toprescuersyear',
+    name: 'toprescuersyear',
+    component: toprescuersyear
+  },
+  {
+    path: '/topcommonsnakes',
+    name: 'topcommonsnakes',
+    component: topcommonsnakes
   },
   {
     path: '/expertslist',

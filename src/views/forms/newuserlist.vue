@@ -10,6 +10,7 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title mb-0">User List</h4>
+          <div v-if="items.length > 0">
             <div class="justify-content-centermy-1 row">
                  <b-form-fieldset horizontal label="Rows per page" class="col-6">
                   <b-form-select :options="[{text:20,value:20},{text:30,value:30},{text:50,value:50}]" v-model="perPage">
@@ -31,6 +32,16 @@
               </template>
                <div class="justify-content-center row my-1">
                 <b-pagination size="md" :total-rows="this.items.length" :per-page="perPage" v-model="currentPage" />
+              </div>
+              </div>
+              <div v-else>
+                <p style="padding-top:10px;padding-bottom:10px">
+
+                  Good job admin!! All users are approved
+
+                </p>
+
+
               </div>
         </div>
      </div>
@@ -84,7 +95,6 @@ export default {
         url: 'http://18.191.40.18/users/new/',
         method: 'GET'
       }).then(response => {
-        console.log(response.data.data)
         this.items = response.data.data
         this.loading = false
       }).catch(e => {

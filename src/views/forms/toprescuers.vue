@@ -10,6 +10,16 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title mb-0">Top Users</h4>
+           <div style="padding-top:20px;padding-bottom:20px;">  <download-excel
+                  class="btn btn-success btn-sm"
+                  :data="json_data"
+                  :fields="json_fields"
+                  name="filename.xls"
+                >
+
+                  Download as Excel
+
+                </download-excel></div>
         
             <div class="justify-content-centermy-1 row">
                  <b-form-fieldset horizontal label="Rows per page" class="col-6">
@@ -28,6 +38,9 @@
                   </template>
                    <template id="pdcy" slot="user" slot-scope="item">
                    {{item.item.user.email}}
+                  </template>
+                   <template id="pdcy" slot="user.phone" slot-scope="item">
+                   {{item.item.user.phone}}
                   </template>
                 </b-table>
               </template>
@@ -54,17 +67,23 @@ export default {
           label: 'Username'
         },
         {
-          key: 'count',
-          label: 'Count'
-        },
-        {
           key: 'user',
           label: 'Email'
+        },
+        {
+          key: 'user.phone',
+          label: 'Phone'
+        },
+        {
+          key: 'count',
+          label: 'Count'
         }
       ],
       json_fields: {
-        "Username": "username",
-        "Email": "email"
+        'Username': 'user.username',
+        'Email': 'user.email',
+        'Phone': 'user.phone',
+        "Count": "count"
       },
       json_data: [],
       json_meta: [
@@ -93,6 +112,7 @@ export default {
         method: 'GET'
       }).then(response => {
         this.items = response.data.data.topusers
+        this.json_data = response.data.data.topusers
         this.loading = false
       }).catch(e => {
         console.log(e)

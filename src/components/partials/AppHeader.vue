@@ -14,11 +14,11 @@
       </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown right class="preview-list">
+        <!-- <b-nav-item-dropdown right class="preview-list">
           <template slot="button-content">
             <div class="count-indicator">
               <i class="icon mdi mdi-email-variant"></i>
-              <!-- <span class="count">7</span> -->
+              <span class="count">7</span>
             </div>
           </template>
           <b-dropdown-item class="preview-item" href="#">
@@ -65,11 +65,11 @@
               </p>
             </div>
           </b-dropdown-item>
-        </b-nav-item-dropdown>
+        </b-nav-item-dropdown> -->
         <b-nav-item-dropdown right>
           <template slot="button-content">
             <div class="count-indicator">
-              <i class="icon mdi mdi-bell-ring"></i>
+              <i class="icon mdi mdi-settings"></i>
               <!-- <span class="count">4</span> -->
             </div>
           </template>
@@ -97,11 +97,17 @@ export default {
         })
         .then(response => {
           localStorage.removeItem('token')
+          localStorage.removeItem('username')
+          localStorage.removeItem('is_admin')
+          localStorage.removeItem('id')
           store.commit('logoutUser')
           this.$router.push({ name: 'login' })
         })
         .catch(e => {
           localStorage.removeItem('token')
+          localStorage.removeItem('username')
+          localStorage.removeItem('is_admin')
+          localStorage.removeItem('id')
           store.commit('logoutUser')
           this.$router.push({ name: 'login' })
         })

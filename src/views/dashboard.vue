@@ -14,7 +14,7 @@
                 <i class="mdi mdi-nature-people text-success icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="card-text text-right">App Users</p>
+                <p class="card-text text-right">Mobile App Users</p>
                 <div class="fluid-container">
                   <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_total_users}}</h3>
                 </div>
@@ -61,7 +61,7 @@
                 <i class="mdi mdi-account-location text-danger icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="card-text text-right">Snake Rescues</p>
+                <p class="card-text text-right">Snakes Rescued</p>
                 <div class="fluid-container">
                   <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_total_locations}}</h3>
                 </div>
@@ -136,7 +136,7 @@
                 <i class="mdi mdi-receipt text-warning icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="card-text text-right">Reported Snakebites</p>
+                <p class="card-text text-right">Snakebite Deaths</p>
                 <div class="fluid-container">
                   <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_management}}</h3>
                 </div>
@@ -205,37 +205,21 @@
 
     </div>
         <div class="row">
-               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card" style="background-color: #94d3f9!important;">
         <div class="card card-statistics">
           <div class="card-body">
-              <div style="text-align:center;font-size:16px;font-weight:500">
-               Human - Snake Conflict Mitigation : ISRN Stats Report 2019<br>
+              <div style="text-align:center;font-size:20px;font-weight:500">
+               Human - Snake Conflict Mitigation : ISRN Status Report 2019<br>
               </div>
              
             </div>
           </div>
         </div>
-      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
+
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
         <div class="card card-statistics">
           <div class="card-body">
-            <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"> <i class="mdi mdi-account-check text-success icon-sm"></i>&emsp;Top users of {{monthname}} </p>
-             <table class="table table-hover">
-  <tbody>
-    <tr v-for="qw in stats.topusers">
-      <th scope="row">{{qw.user.name}}</th>
-      <td>{{qw.count}}</td>
-    </tr>
-  </tbody>
-</table>
-<p style="text-align:center"><router-link to="toprescuers">View More</router-link></p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
-        <div class="card card-statistics">
-          <div class="card-body">
-             <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"> <i class="mdi mdi-rotate-right-variant text-warning icon-sm"></i>&emsp;Top Common Snakes {{year}} </p>
+             <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"> <i class="mdi mdi-rotate-right-variant text-warning icon-sm"></i>&emsp;Most Common Snakes - {{year}} </p>
            <table class="table table-hover">
   <tbody>
     <tr v-for="qw in stats.topsnakesyear">
@@ -244,14 +228,35 @@
     </tr>
   </tbody>
 </table>
+<hr>
+<p style="text-align:center"><router-link to="topcommonsnakes">View More</router-link></p>
         </div>
       </div>
     </div>
 
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
+        <div class="card card-statistics">
+          <div class="card-body">
+            <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"> <i class="mdi mdi-account-check text-success icon-sm"></i>&emsp;Top Rescuers of {{monthname}} </p>
+             <table class="table table-hover">
+  <tbody>
+    <tr v-for="qw in stats.topusers">
+      <th scope="row">{{qw.user.name}}</th>
+      <td>{{qw.count}}</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<p style="text-align:center"><router-link to="toprescuers">View More</router-link></p>
+          </div>
+        </div>
+      </div>
+      
+
   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
         <div class="card card-statistics">
           <div class="card-body">
-            <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"><i class="mdi mdi-human-child text-info icon-sm"></i>&emsp;Top users of {{year}} </p>
+            <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"><i class="mdi mdi-human-child text-info icon-sm"></i>&emsp;Top Rescuers of {{year}} </p>
              <table class="table table-hover">
   <tbody>
     <tr v-for="qw in stats.topusersyear">
@@ -260,6 +265,8 @@
     </tr>
   </tbody>
 </table>
+<hr>
+<p style="text-align:center"><router-link to="toprescuersyear">View More</router-link></p>
           </div>
         </div>
       </div>
@@ -481,6 +488,7 @@ export default {
     }
   },
   mounted: function () {
+    this.authCheck()
     this.loadStats()
     const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -490,6 +498,35 @@ this.monthname = monthNames[d.getMonth()];
 this.year = d.getFullYear();
   },
   methods: {
+    authCheck(){
+      axios({
+        url: 'http://localhost:3000/isLoggedIn',
+        method: 'GET',
+        headers: {
+                    'x-auth-token': localStorage.getItem("token")
+                },
+      }).then(response => {
+        if(response.data.status == true){
+          console.log('sdf')
+          //loggedIn
+        }
+        else{
+           localStorage.removeItem('token')
+          localStorage.removeItem('username')
+          localStorage.removeItem('is_admin')
+          localStorage.removeItem('id')
+          store.commit('logoutUser')
+          this.$router.push({ name: 'login' })
+        }
+      }).catch(e => {
+         localStorage.removeItem('token')
+          localStorage.removeItem('username')
+          localStorage.removeItem('is_admin')
+          localStorage.removeItem('id')
+          store.commit('logoutUser')
+          this.$router.push({ name: 'login' })
+      })
+    },
     loadStats () {
       this.loading = true
       axios({
