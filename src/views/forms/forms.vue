@@ -619,7 +619,7 @@ export default {
     getExperts () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/user/experts',
+        url: 'http://13.126.210.153/user/experts',
         method: 'GET'
       }).then(response => {
         console.log(response.data.data)
@@ -684,7 +684,7 @@ export default {
       console.log(temp)
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/snake/',
+        url: 'http://13.126.210.153/snake/',
         data: {
           name: this.name,
           scientificName: this.scientificName,
@@ -728,7 +728,7 @@ export default {
       formData.append('author', this.author)
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/snake/image/',
+        url: 'http://13.126.210.153/snake/image/',
         data: formData,
         headers: {
           'Content-Type': 'multipart/form-data'

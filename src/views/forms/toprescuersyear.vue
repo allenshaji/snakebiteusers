@@ -108,7 +108,7 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/user/allstats',
+        url: 'http://13.126.210.153/user/allstats',
         method: 'GET'
       }).then(response => {
         this.items = response.data.data.topusersyear

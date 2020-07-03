@@ -3,7 +3,7 @@
     <div class="container-scroller">
       <app-header v-if="showMenu"/>
       <div class="container-fluid page-body-wrapper">
-        <app-sidebar v-if="showMenu"/>
+        <!-- <app-sidebar v-if="showMenu"/> -->
         <div class="main-panel">
           <div class="content-wrapper">
             <router-view></router-view>
@@ -42,4 +42,14 @@ export default{
 
 <style lang="scss">
 @import "./assets/scss/style";
+.main-panel {
+    width: calc(100% - 0px);
+}
+a:hover {
+    color: #0c0c0c;
+    text-decoration: underline;
+}
+a{
+  color: #000000;
+}
 </style>

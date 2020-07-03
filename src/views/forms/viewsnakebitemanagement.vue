@@ -112,7 +112,7 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/snakebiteinfo/all',
+        url: 'http://13.126.210.153/snakebiteinfo/all',
         method: 'GET'
       }).then(response => {
         console.log(response.data.data)
@@ -133,7 +133,7 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/snake/',
+        url: 'http://13.126.210.153/snake/',
         data: {
           id: vm.item
         }

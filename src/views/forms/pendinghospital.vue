@@ -93,7 +93,7 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/hospital/allnew',
+        url: 'http://13.126.210.153/hospital/allnew',
         method: 'GET'
       }).then(response => {
         this.items = response.data.data
@@ -111,7 +111,7 @@ export default {
         headers: {
           'x-auth-token': localStorage.getItem('token')
         },
-        url: 'http://18.191.40.18/hospital/verify',
+        url: 'http://13.126.210.153/hospital/verify',
         data: {
           id: vm.item
         }
@@ -130,7 +130,7 @@ export default {
         headers: {
           'x-auth-token': localStorage.getItem('token')
         },
-        url: 'http://18.191.40.18/hospital/delete',
+        url: 'http://13.126.210.153/hospital/delete',
         data: {
           id: vm.item
         }

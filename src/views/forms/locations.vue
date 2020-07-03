@@ -24,7 +24,7 @@
                 <b-table striped hover :items="itemsnew" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;">
                    <template id="pdcy" slot="snake" slot-scope="item">{{item.item.snake}}
                   </template>
-                  <template id="pdcy" slot="pic" slot-scope="item" style="text-align:center;"><img v-bind:src="'http://18.191.40.18/u/'+item.item.pic" width="20%" height="auto">
+                  <template id="pdcy" slot="pic" slot-scope="item" style="text-align:center;"><img v-bind:src="'http://13.126.210.153/u/'+item.item.pic" width="20%" height="auto">
                   </template>
                    <template id="pdcy" slot="_id" slot-scope="item">
                   <button class="btn btn-danger" @click="deleteLocation(item)">Delete</button>
@@ -92,7 +92,7 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/location/all/',
+        url: 'http://13.126.210.153/location/all/',
         method: 'GET'
       }).then(response => {
         this.items = response.data.data.records
@@ -125,7 +125,7 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/location/',
+        url: 'http://13.126.210.153/location/',
         data: {
           id: vm.item
         }

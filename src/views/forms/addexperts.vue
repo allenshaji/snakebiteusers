@@ -298,7 +298,7 @@ export default {
       this.loading = true
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/user/',
+        url: 'http://13.126.210.153/user/',
         data: {
           name: this.name,
           username: this.username,

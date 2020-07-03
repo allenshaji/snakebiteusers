@@ -331,7 +331,7 @@
                    <h4 class="card-title">View Images</h4>
                   <div class="row" v-for = "pic in photographs" v-bind:key="pic.url" style="margin-top:20px;">
                 <div class="col-md-4">
-                  <img v-bind:src="'http://18.191.40.18/u/'+pic.url" height="auto" width="100%" />
+                  <img v-bind:src="'http://13.126.210.153/u/'+pic.url" height="auto" width="100%" />
              </div>
              <div class="col-md-4">
                 <button class="btn btn-danger" @click="deleteImage(pic)">Delete</button>
@@ -404,7 +404,7 @@ export default {
     getExperts () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/user/experts',
+        url: 'http://13.126.210.153/user/experts',
         method: 'GET'
       }).then(response => {
         this.items1 = response.data.data
@@ -442,7 +442,7 @@ export default {
       this.loading = true
       console.log(this.items1)
       axios({
-        url: 'http://18.191.40.18/snake/' + this.id,
+        url: 'http://13.126.210.153/snake/' + this.id,
         method: 'POST'
       }).then(response => {
         this.items = response.data.data
@@ -518,7 +518,7 @@ export default {
       }
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/snake/edit',
+        url: 'http://13.126.210.153/snake/edit',
         data: {
           id: this.id,
           name: this.name,
@@ -562,7 +562,7 @@ export default {
       formData.append('author', this.author)
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/snake/image/',
+        url: 'http://13.126.210.153/snake/image/',
         data: formData,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -589,7 +589,7 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/snake/remove/image/',
+        url: 'http://13.126.210.153/snake/remove/image/',
         data: {
           id: vm.fid,
           pid: vm.item

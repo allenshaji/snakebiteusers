@@ -28,7 +28,7 @@
                     <template id="pie" slot="photographs" slot-scope="item">
                     <div v-for="d in item.item.photographs" v-bind:key="d" >
 
-<img v-bind:src="'http://18.191.40.18/u/'+d.url" width="20%" height="auto">
+<img v-bind:src="'http://13.126.210.153/u/'+d.url" width="20%" height="auto">
 </div>
                   </template>
                   <template id="chr" slot="description" slot-scope="item">
@@ -116,7 +116,7 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/snake/all/',
+        url: 'http://13.126.210.153/snake/all/',
         method: 'GET'
       }).then(response => {
         this.items = response.data.data
@@ -129,7 +129,7 @@ export default {
     getExpertList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/snake/expert/get',
+        url: 'http://13.126.210.153/snake/expert/get',
         method: 'POST',
         data: {
           id: this.id
@@ -151,7 +151,7 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/snake/',
+        url: 'http://13.126.210.153/snake/',
         data: {
           id: vm.item
         }

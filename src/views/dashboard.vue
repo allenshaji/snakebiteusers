@@ -5,45 +5,45 @@
                             <p style="position: absolute; color: White; top: 40%; left: 40%;">
                                 <img src='../assets/snakes.gif' /></p>
                         </div>
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
         <div class="card card-statistics">
           <div class="card-body">
             <div class="clearfix">
-                <router-link to="/usermap">
+                <router-link to="/snakereports">
               <div class="float-left">
                 <i class="mdi mdi-nature-people text-success icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="card-text text-right">Mobile App Users</p>
+                <p class="card-text text-right">Total Snake Rescues</p>
                 <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_total_users}}</h3>
+                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.totalcount}}</h3>
                 </div>
               </div></router-link>
             </div>
-             <router-link to="/usermap">
+             <router-link to="/snakereports">
             <p class="text-muted mt-3">
-              <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> View Details
+              <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> View Map
             </p></router-link>
           </div>
         </div>
        
       </div> 
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
         <div class="card card-statistics">
           <div class="card-body">
             <div class="clearfix">
-                <router-link to="/rescuermap">
+                <router-link to="/snakereports">
               <div class="float-left">
                 <i class="mdi mdi-human-child text-info icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="card-text text-right">Snake Rescuers</p>
+                <p class="card-text text-right">Rescues of {{year}}</p>
                 <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_total_rescuer}}</h3>
+                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.thisyearcount}}</h3>
                 </div>
               </div></router-link>
             </div>
-              <router-link to="/rescuermap">
+              <router-link to="/snakereports">
             <p class="text-muted mt-3">
               <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> View Map
             </p>
@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
         
         <div class="card card-statistics">
           <div class="card-body">
@@ -61,9 +61,9 @@
                 <i class="mdi mdi-account-location text-danger icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="card-text text-right">Snakes Rescued</p>
+                <p class="card-text text-right">Rescues of {{monthname}}</p>
                 <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_total_locations}}</h3>
+                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.thismonthcount}}</h3>
                 </div>
               </div></router-link>
             </div>
@@ -76,133 +76,7 @@
         </div>
         
       </div>
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-        <div class="card card-statistics">
-          <div class="card-body">
-            <div class="clearfix">
-               <router-link to="/identifyview">
-              <div class="float-left">
-                <i class="mdi mdi-poll-box text-warning icon-lg"></i>
-              </div>
-              <div class="float-right">
-                <p class="card-text text-right">Identification Help</p>
-                <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_identify}}</h3>
-                </div>
-              </div></router-link>
-            </div>
-             <router-link to="/identifyview">
-            <p class="text-muted mt-3">
-              <i class="mdi mdi-reload mr-1" aria-hidden="true"></i> View Details
-            </p>
-            </router-link>
-          </div>
-        </div>
-      </div>
       
-    </div>
-    <div class="row">
-       <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-        <div class="card card-statistics">
-          <div class="card-body">
-            <div class="clearfix">
-                <router-link to="/hospitalmap">
-              <div class="float-left">
-                <i class="mdi mdi-hospital text-danger icon-lg"></i>
-              </div>
-              <div class="float-right">
-                <p class="card-text text-right">Listed Hospitals</p>
-                <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_hospital}}</h3>
-                </div>
-              </div></router-link>
-            </div>
-             <router-link to="/hospitalmap">
-            <p class="text-muted mt-3">
-              <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> View Map
-            </p></router-link>
-          </div>
-        </div>
-       
-      </div> 
-
-
- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-        <div class="card card-statistics">
-          <div class="card-body">
-            <div class="clearfix">
-                <router-link to="/viewsnakebitemanagement">
-              <div class="float-left">
-                <i class="mdi mdi-receipt text-warning icon-lg"></i>
-              </div>
-              <div class="float-right">
-                <p class="card-text text-right">Snakebite Deaths</p>
-                <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_management}}</h3>
-                </div>
-              </div></router-link>
-            </div>
-              <router-link to="/viewsnakebitemanagement">
-            <p class="text-muted mt-3">
-              <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> View Details
-            </p>
-            </router-link>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-        
-        <div class="card card-statistics">
-          <div class="card-body">
-            <div class="clearfix">
-                <router-link to="/viewlist">
-              <div class="float-left">
-                <i class="mdi mdi-rotate-right-variant text-teal icon-lg"></i>
-              </div>
-              <div class="float-right">
-                <p class="card-text text-right">Listed Snakes</p>
-                <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_snakes}}</h3>
-                </div>
-              </div></router-link>
-            </div>
-              <router-link to="/viewlist">
-            <p class="text-muted mt-3">
-              <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> View Details
-            </p>
-            </router-link>
-          </div>
-        </div>
-        
-      </div>
-
-
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-        <div class="card card-statistics">
-          <div class="card-body">
-            <div class="clearfix">
-               <router-link to="/expertslist">
-              <div class="float-left">
-                <i class="mdi mdi-phone-in-talk text-info icon-lg"></i>
-              </div>
-              <div class="float-right">
-                <p class="card-text text-right">Snake Experts</p>
-                <div class="fluid-container">
-                  <h3 class="card-title font-weight-bold text-right mb-0">{{stats.count_total_experts}}</h3>
-                </div>
-              </div></router-link>
-            </div>
-             <router-link to="/expertslist">
-            <p class="text-muted mt-3">
-              <i class="mdi mdi-reload mr-1" aria-hidden="true"></i> View Details
-            </p>
-            </router-link>
-          </div>
-        </div>
-      </div>
-
-
     </div>
         <div class="row">
                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card" style="background-color: #94d3f9!important;">
@@ -219,17 +93,17 @@
     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
         <div class="card card-statistics">
           <div class="card-body">
-             <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"> <i class="mdi mdi-rotate-right-variant text-warning icon-sm"></i>&emsp;Most Common Snakes - {{year}} </p>
+             <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"> <i class="mdi mdi-rotate-right-variant text-warning icon-sm"></i>&emsp;All Rescues </p>
            <table class="table table-hover">
   <tbody>
-    <tr v-for="qw in stats.topsnakesyear">
+    <tr v-for="qw in stats.totalsnakes">
       <th scope="row">{{qw.snake.name}}</th>
       <td>{{qw.count}}</td>
     </tr>
   </tbody>
 </table>
 <hr>
-<p style="text-align:center"><router-link to="topcommonsnakes">View More</router-link></p>
+<!-- <p style="text-align:center"><router-link to="topcommonsnakes">View More</router-link></p> -->
         </div>
       </div>
     </div>
@@ -237,17 +111,17 @@
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
         <div class="card card-statistics">
           <div class="card-body">
-            <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"> <i class="mdi mdi-account-check text-success icon-sm"></i>&emsp;Top Rescuers of {{monthname}} </p>
+            <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"> <i class="mdi mdi-account-check text-success icon-sm"></i>&emsp;Top Rescues of {{monthname}} </p>
              <table class="table table-hover">
   <tbody>
-    <tr v-for="qw in stats.topusers">
-      <th scope="row">{{qw.user.name}}</th>
+    <tr v-for="qw in statsn.thismonthsnakes">
+      <th scope="row">{{qw.snake.name}}</th>
       <td>{{qw.count}}</td>
     </tr>
   </tbody>
 </table>
 <hr>
-<p style="text-align:center"><router-link to="toprescuers">View More</router-link></p>
+<!-- <p style="text-align:center"><router-link to="toprescuers">View More</router-link></p> -->
           </div>
         </div>
       </div>
@@ -256,17 +130,17 @@
   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
         <div class="card card-statistics">
           <div class="card-body">
-            <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"><i class="mdi mdi-human-child text-info icon-sm"></i>&emsp;Top Rescuers of {{year}} </p>
+            <p style="text-align:left;font-size:16px;font-weight:500;padding-bottom:10px;"><i class="mdi mdi-human-child text-info icon-sm"></i>&emsp;Top Rescues of {{year}} </p>
              <table class="table table-hover">
   <tbody>
-    <tr v-for="qw in stats.topusersyear">
-      <th scope="row">{{qw.user.name}}</th>
+    <tr v-for="qw in stats.thisyearsnakes">
+      <th scope="row">{{qw.snake.name}}</th>
       <td>{{qw.count}}</td>
     </tr>
   </tbody>
 </table>
 <hr>
-<p style="text-align:center"><router-link to="toprescuersyear">View More</router-link></p>
+<!-- <p style="text-align:center"><router-link to="toprescuersyear">View More</router-link></p> -->
           </div>
         </div>
       </div>
@@ -482,14 +356,17 @@ export default {
       items: [],
       oMarker: [],
       stats: '',
+      statsn:'',
       monthname: '',
       year: '',
       loading: false
     }
   },
   mounted: function () {
+   
     this.authCheck()
     this.loadStats()
+     this.loadStatsAll()
     const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
@@ -500,14 +377,13 @@ this.year = d.getFullYear();
   methods: {
     authCheck(){
       axios({
-        url: 'http://localhost:3000/isLoggedIn',
+        url: 'http://13.126.210.153/isLoggedIn',
         method: 'GET',
         headers: {
                     'x-auth-token': localStorage.getItem("token")
                 },
       }).then(response => {
         if(response.data.status == true){
-          console.log('sdf')
           //loggedIn
         }
         else{
@@ -530,10 +406,29 @@ this.year = d.getFullYear();
     loadStats () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/user/stats',
-        method: 'GET'
+        url: 'http://13.126.210.153/location/stats/mine',
+        method: 'POST',
+         headers: {
+                    'x-auth-token': localStorage.getItem("token")
+                },
       }).then(response => {
         this.stats = response.data.data
+        this.loading = false
+      }).catch(e => {
+        console.log(e)
+        this.errors.push(e)
+      })
+    },
+        loadStatsAll () {
+      this.loading = true
+      axios({
+        url: 'http://13.126.210.153/user/stats',
+        method: 'GET',
+         headers: {
+                    'x-auth-token': localStorage.getItem("token")
+                },
+      }).then(response => {
+        this.statsn = response.data.data
         this.loading = false
       }).catch(e => {
         console.log(e)
@@ -550,6 +445,6 @@ a:hover {
     text-decoration: none;
 }
 a {
-  color: #212529;
+    color: #000000!important;
 }
 </style>

@@ -64,7 +64,7 @@ export default {
       this.loading = true
       evt.preventDefault()
       axios
-        .post(`http://18.191.40.18/user/login/`, this.login)
+        .post(`http://13.126.210.153/user/login/`, this.login)
         .then(response => {
           store.commit('loginUser')
           localStorage.setItem('token', response.data.data.token)

@@ -85,7 +85,7 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/users/rescuers/requested',
+        url: 'http://13.126.210.153/users/rescuers/requested',
         method: 'GET'
       }).then(response => {
         console.log(response.data.data)
@@ -104,7 +104,7 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/user/make/rescuer',
+        url: 'http://13.126.210.153/user/make/rescuer',
         data: {
           id: vm.item
         }

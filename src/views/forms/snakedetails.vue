@@ -21,7 +21,7 @@
   >
     <b-carousel-slide v-for = "pic in photographs" v-bind:key="pic.url"
       v-bind:caption="pic.caption"
-     v-bind:img-src="'http://18.191.40.18/u/'+pic.url"
+     v-bind:img-src="'http://13.126.210.153/u/'+pic.url"
     ></b-carousel-slide>
   </b-carousel>
             </div>
@@ -149,7 +149,7 @@ export default {
     getAll () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/snake/' + this.id,
+        url: 'http://13.126.210.153/snake/' + this.id,
         method: 'POST'
       }).then(response => {
         this.items = response.data.data
@@ -178,7 +178,7 @@ export default {
             caption: d.photographs[j].caption,
             url: d.photographs[j].url
           }
-          var ty = 'http://18.191.40.18/u/' + d.photographs[j].url
+          var ty = 'http://13.126.210.153/u/' + d.photographs[j].url
           tempr.push(tyz)
           tempt.push(ty)
         }
@@ -195,7 +195,7 @@ export default {
       this.loading = true
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/snake/edit',
+        url: 'http://13.126.210.153/snake/edit',
         data: {
           id: this.id,
           name: this.name,
@@ -236,7 +236,7 @@ export default {
       formData.append('author', this.author)
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/snake/image/',
+        url: 'http://13.126.210.153/snake/image/',
         data: formData,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -263,7 +263,7 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/snake/remove/image/',
+        url: 'http://13.126.210.153/snake/remove/image/',
         data: {
           id: vm.fid,
           pid: vm.item

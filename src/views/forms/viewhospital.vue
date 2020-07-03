@@ -86,7 +86,7 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/hospital/all',
+        url: 'http://13.126.210.153/hospital/all',
         method: 'GET'
       }).then(response => {
         this.items = response.data.data
@@ -104,7 +104,7 @@ export default {
         headers: {
           'x-auth-token': localStorage.getItem('token')
         },
-        url: 'http://18.191.40.18/hospital/delete',
+        url: 'http://13.126.210.153/hospital/delete',
         data: {
           id: vm.item
         }

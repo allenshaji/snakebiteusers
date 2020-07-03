@@ -23,7 +23,7 @@
              <b>Added By:</b> {{items.added_by.email}}
             </div>
             <div class="big4">
-             <img v-bind:src="'http://18.191.40.18/u/'+items.photo" width="100%" height="auto">
+             <img v-bind:src="'http://13.126.210.153/u/'+items.photo" width="100%" height="auto">
             </div>
              </div>
              </div>
@@ -101,7 +101,7 @@ export default {
     getAll () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/adminreply/',
+        url: 'http://13.126.210.153/adminreply/',
         method: 'GET',
         params: {
           id: this.id
@@ -118,7 +118,7 @@ export default {
       this.loading = true
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/adminreply/',
+        url: 'http://13.126.210.153/adminreply/',
         data: {
           id: this.id,
           name: this.name,

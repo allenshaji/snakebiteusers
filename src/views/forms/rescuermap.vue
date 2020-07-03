@@ -51,7 +51,7 @@ export default {
       // eslint-disable-next-line
       vm.map = new google.maps.Map(mapCanvas, mapOptions)
       axios({
-        url: 'http://18.191.40.18/users/rescuers/all',
+        url: 'http://13.126.210.153/users/rescuers/all',
         method: 'GET'
       }).then(response => {
         this.records = response.data.data

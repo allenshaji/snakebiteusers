@@ -9,7 +9,26 @@
     <div class="col-md-12 grid-margin">
       <div class="card">
         <div class="card-body">
-              <h4 class="card-title mb-0">Users Map</h4><br>
+              <h4 class="card-title mb-0">Total Rescues</h4><br>
+              <div class="row">
+                <div class="col-md-4"> <b-form-group label="From"  label-for="input1">
+                    <b-form-input type="date" id="input1" v-model="from" placeholder="From data"></b-form-input>
+                  </b-form-group></div>
+                   <div class="col-md-4"> <b-form-group label="To"  label-for="input">
+                    <b-form-input type="date" id="input1" v-model="to" placeholder="To date"></b-form-input>
+                  </b-form-group></div>
+                      <div class="col-md-4"> <b-form-group label="SnakeList"  label-for="input1">
+                    <!-- <select class="form-control" v-model="snakeid" name="snake"
+                                                            required="">
+                                                            <option value="" selected disabled hidden>Choose Snakes
+                                                                here</option>
+                                                            <option v-for="sop in items" v-bind:value="sop._id">{{sop.name}}
+                                                            </option>
+                                                        </select> -->
+                                                          <v-select v-model="snakeid" :options="snakes" ></v-select>
+                  </b-form-group></div>
+                </div>
+              <p>Count: {{count}}</p>
            <div id="map"></div>
            
              
@@ -21,9 +40,13 @@
  </template>
 <script lang="js">
 import axios from 'axios'
+import vSelect from 'vue-select'
 var marker
 export default {
   name: 'dashboard',
+  components: {
+    vSelect
+  },
   data () {
     return {
       records: [],
@@ -31,14 +54,53 @@ export default {
       oMarker: [],
       stats: '',
       loading: false,
+      count: '',
+      from: '',
+      to: '',
+      snakeid: '',
+      snakes: [],
     }
   },
+  watch: {
+  from: function() {
+    if(this.from !== '' && this.to != '')
+          this.loadMap();
+  },
+  to: function() {
+     if(this.from !== '' && this.to != '')
+          this.loadMap();
+  },
+  snakeid: function () {
+    this.loadMap();
+  }
+  },
   mounted: function () {
+    this.getList()
     this.loadMap()
   },
   methods: {
-    loadMap () {
+    getList () {
       this.loading = true
+      axios({
+        url: 'http://13.126.210.153/snake/all/',
+        method: 'GET'
+      }).then(response => {
+        this.items = response.data.data
+        var temp = []
+        for (var i = 0; i < this.items.length; i++) {
+          var ty = this.items[i].name
+          temp.push(ty)
+        }
+        this.snakes = temp
+        console.log(this.snakes)
+        this.loading = false
+      }).catch(e => {
+        console.log(e)
+        this.errors.push(e)
+      })
+    },
+    loadMap () {
+      // this.loading = true
       var mapCanvas = document.getElementById('map')
       var mapOptions = {
         // eslint-disable-next-line
@@ -50,12 +112,28 @@ export default {
       var vm = this
       // eslint-disable-next-line
       vm.map = new google.maps.Map(mapCanvas, mapOptions)
+        for (var i = 0; i < this.items.length; i++) {
+        
+          if (this.items[i].name === this.snakeid) {
+            var ty = this.items[i]._id
+
+          
+        }
+      }
+       var data = {};
+          if (this.from != '') data['from'] = this.from
+          if (this.to != '') data['to'] = this.to
+          if (this.snakeid != '') data['snakeid'] = ty
  axios({
-        url: 'http://18.191.40.18/location/all/',
-        method: 'GET'
+        url: 'http://13.126.210.153/location/search/mine',
+        method: 'POST',
+        data: data,
+        headers: {
+                    'x-auth-token': localStorage.getItem("token")
+                },
       }).then(response => {
-        this.items = response.data.data
         this.records = response.data.data.records
+        this.count = this.records.length
         for (var i = 0; i < this.records.length; i++) {
           var id = this.records[i]._id
           var lat = this.records[i].location[0]

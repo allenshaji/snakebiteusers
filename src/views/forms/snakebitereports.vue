@@ -21,7 +21,7 @@
                 </b-form-fieldset>
               </div>
               <template>
-                <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;"> <template id="pdcy" slot="photo" slot-scope="item" style="text-align:center;"><img v-bind:src="'http://18.191.40.18/u/'+item.item.photo" width="20%" height="auto">
+                <b-table striped hover :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" style="font-weight: 200;"> <template id="pdcy" slot="photo" slot-scope="item" style="text-align:center;"><img v-bind:src="'http://13.126.210.153/u/'+item.item.photo" width="20%" height="auto">
                   </template>
                   <template id="pdc" slot="added_by" slot-scope="item">{{item.item.added_by.username}} - {{item.item.added_by.phone}} - {{item.item.added_by.email}}
                   </template>
@@ -84,7 +84,7 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/snakebite/all',
+        url: 'http://13.126.210.153/snakebite/all',
         method: 'GET'
       }).then(response => {
         this.items = response.data.data
@@ -103,7 +103,7 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/snakebite/',
+        url: 'http://13.126.210.153/snakebite/',
         data: {
           id: vm.item
         }

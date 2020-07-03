@@ -151,7 +151,7 @@ export default {
       this.loading = true
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/snakebiteinfo/',
+        url: 'http://13.126.210.153/snakebiteinfo/',
         data: {
           createddate: this.cdate,
           linktonews: this.link,

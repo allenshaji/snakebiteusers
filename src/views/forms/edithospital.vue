@@ -347,7 +347,7 @@ export default {
         getList () {
       this.loading = true
       axios({
-       url: 'http://18.191.40.18/hospital/' + this.id,
+       url: 'http://13.126.210.153/hospital/' + this.id,
         method: 'GET'
       }).then(response => {
         this.name = response.data.data.name
@@ -378,7 +378,7 @@ export default {
       this.loading = true
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/hospital/edit',
+        url: 'http://13.126.210.153/hospital/edit',
         data: {
           id: this.id,
           name: this.name,

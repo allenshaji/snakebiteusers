@@ -354,7 +354,7 @@ export default {
       this.loading = true
       axios({
         method: 'post',
-        url: 'http://18.191.40.18/hospital/',
+        url: 'http://13.126.210.153/hospital/',
         data: {
           name: this.name,
           lat: this.lat,

@@ -89,7 +89,7 @@ export default {
     getList () {
       this.loading = true
       axios({
-        url: 'http://18.191.40.18/user/experts',
+        url: 'http://13.126.210.153/user/experts',
         method: 'GET'
       }).then(response => {
         console.log(response.data.data)
@@ -108,7 +108,7 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/user/activate',
+        url: 'http://13.126.210.153/user/activate',
         data: {
           id: vm.item
         }
@@ -128,7 +128,7 @@ export default {
         // headers: {
         //             Authorization: localStorage.getItem("token")
         //         },
-        url: 'http://18.191.40.18/user/delete',
+        url: 'http://13.126.210.153/user/delete',
         data: {
           id: vm.item
         }
